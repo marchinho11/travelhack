@@ -1,4 +1,6 @@
 FROM python:3.9-slim-buster AS requirements_builder
+ADD pyproject.toml /
+ADD poetry.lock /
 RUN pip install poetry
 RUN poetry export -f requirements.txt --output requirements.txt
 

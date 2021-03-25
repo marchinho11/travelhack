@@ -1,51 +1,25 @@
-import React from 'react';
-import Router from '@/Router';
-import NetworkService from '@/services/NetworkService';
-import RequestService from '@/services/RequestService';
-import { StoresNames } from '@/services/common/constDictionary';
-import { Provider } from 'mobx-react';
-import LoaderStore from '@/stores/LoaderStore';
-import ErrorWindow from '@/components/System/ErrorWindow';
-import Loader from '@/components/System/Loader';
-import RecommendationStore from '@/stores/RecommendationStore';
+import logo from './logo.svg';
+import './App.css';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    const endpoint = this.getCheckAppMode(APPMODE);
-    this.loaderStore = new LoaderStore();
-    this.recommendationStore = new RecommendationStore();
-    this.networkService = new NetworkService({ endpoint, appStore: this.appStore });
-    this.requestService = new RequestService(this.networkService);
-
-    this.networkService.setToken(localStorage.token || 'token');
-
-    this.stores = {
-      [StoresNames.LoaderStore]: this.loaderStore,
-      [StoresNames.RecommendationStore]: this.recommendationStore,
-      [StoresNames.URL]: endpoint,
-    };
-
-    this.services = {
-      networkService: this.networkService,
-      requestService: this.requestService,
-    };
-  }
-
-  getCheckAppMode(mode) {
-    return process.env.APP_ENDPOINT_REQUEST;
-  }
-
-  render() {
-    return (
-      <Provider {...this.stores} services={this.services}>
-        <ErrorWindow>
-          <Loader />
-          <Router />
-        </ErrorWindow>
-      </Provider>
-    );
-  }
+function App() {
+  return (
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React dxfcgvhbjnklm,;.
+        </a>
+      </header>
+    </div>
+  );
 }
 
 export default App;
