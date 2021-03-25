@@ -29,6 +29,6 @@ services:
 
   frontend:
     <<: *frontend
-    command: npm start
+    command: nodemon npm start
     ports:
       - 3000:3000
