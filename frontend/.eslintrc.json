@@ -1,0 +1,93 @@
+{
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "node": true
+  },
+  "globals": {
+    "APPMODE": "readonly"
+  },
+  "extends": [
+    "eslint-config-airbnb"
+  ],
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "rules": {
+    "template-curly-spacing" : "off",
+    "indent": ["warn", 2, {
+      "ignoredNodes": ["TemplateLiteral"]
+    }],
+    "react/prop-types": "off",
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".js",
+          ".jsx"
+        ]
+      }
+    ],
+    "comma-dangle": [
+      "warn",
+      "only-multiline"
+    ],
+    "max-len": [
+      "warn",
+      {
+        "code": 500
+      }
+    ],
+    "semi": [
+      "warn",
+      "always"
+    ],
+    "no-unused-vars": [
+      "warn",
+      {
+        "args": "none"
+      }
+    ],
+    "lines-between-class-members": [
+      "warn",
+      "always"
+    ],
+    "arrow-parens": [
+      "warn",
+      "as-needed"
+    ],
+    "keyword-spacing": [
+      "warn",
+      {
+        "after": true,
+        "before": true
+      }
+    ],
+    "react/button-has-type": "off",
+    "arrow-spacing": "warn",
+    "radix": 0,
+    "prefer-template": "warn",
+    "no-use-before-define": "warn",
+    "no-restricted-syntax": "warn",
+    "consistent-return": "warn",
+    "prefer-destructuring": 0,
+    "no-underscore-dangle": 0,
+    "react/jsx-props-no-spreading": 0,
+    "no-plusplus": 0,
+    "no-console": 0,
+    "linebreak-style": 0,
+    "no-param-reassign": 0,
+    "class-methods-use-this": 0,
+    "react/destructuring-assignment": 0,
+    "react/prefer-stateless-function": 0,
+    "import/no-unresolved": "off",
+    "react/no-children-prop": "off",
+    "no-debugger": "off",
+    "jsx-a11y/label-has-associated-control": 0,
+    "jsx-a11y/click-events-have-key-events": 0,
+    "jsx-a11y/anchor-is-valid": 0,
+    "react/sort-comp": 0
+  }
+}

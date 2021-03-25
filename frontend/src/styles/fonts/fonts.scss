@@ -1,0 +1,57 @@
+@font-face{
+  font-family: 'OpenSans-SemiBold';
+  src: url("~@styles/fonts/OpenSans-SemiBold.ttf") format("truetype");
+  font-size: normal;
+}
+
+@font-face{
+  font-family: 'OpenSans-Regular';
+  src: url("~@styles/fonts/OpenSans-Regular.ttf") format("truetype");
+  font-size: normal;
+}
+
+@font-face{
+  font-family: 'Gilroy-Black';
+  src: url("~@styles/fonts/Gilroy-Black.ttf") format("truetype");
+  font-style: normal;
+}
+
+@font-face{
+  font-family: 'Gilroy-Medium';
+  src: url("~@styles/fonts/Gilroy-Medium.ttf") format("truetype");
+  font-size: normal;
+}
+
+html button, html input, html optgroup, html select, html textarea, label, a, span, i {
+  font-family: OpenSans-Regular, sans-serif !important;
+  font-size: 100% !important;
+  margin: 0 !important;
+}
+
+
+.logo{
+  font-size: 16px !important;
+  text-align: center !important;
+  font-family: OpenSans-SemiBold, serif !important;
+}
+
+
+.GuestPage{
+  html button, html input, html optgroup, html select, html textarea {
+    font-family: 'Gilroy-Black';
+    font-size: 100%;
+    margin: 0;
+  }
+}
+
+.textMuted{
+  color: #9ca8b3 !important;
+  font-family: OpenSans-Regular;
+  background-color: transparent;
+  box-sizing: border-box;
+  font-size: 13px !important;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+
