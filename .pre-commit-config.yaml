@@ -1,0 +1,21 @@
+repos:
+  - repo: local
+    hooks:
+      - id: autoflake
+        name: autoflake
+        entry: poetry run autoflake
+        language: system
+        types: [ python ]
+        require_serial: true
+        args: [--in-place, --remove-all-unused-imports, --ignore-init-module-imports, -r, .]
+
+  - repo: https://github.com/psf/black
+    rev: '20.8b1'
+    hooks:
+      - id: black
+        language_version: python3.9
+
+  - repo: https://github.com/pre-commit/mirrors-isort
+    rev: 'v5.7.0'
+    hooks:
+      - id: isort
