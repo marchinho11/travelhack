@@ -15,9 +15,9 @@ clean:
 format:
 	pre-commit run -a
 
+jupyter:
+	poetry run jupyter notebook
+
 restart:
 	docker-compose down
 	docker-compose up -d
-
-jupyter:
-	poetry run jupyter notebook
