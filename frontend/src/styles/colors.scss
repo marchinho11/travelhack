@@ -1,0 +1,35 @@
+$linkColor: #3498db;
+$fontColor: #333333;
+
+$white: #FFF;
+$primary: #30419b;
+
+$secondary: #34495e;
+$info: #ecf0f1;
+$error:  #e74c3c;
+$warning: #f1c40f;
+$success: #2ecc71;
+$disabled:#f5f5f5;
+$active: #2A89DB;
+
+$black: #000000;
+$gray: #eeeeee;
+//$gray_footer: #f5f5f5;
+
+
+
+
+
+@if function-exists(get) {
+  $linkColor: get("palette.linkColor") or $linkColor;
+  $fontColor: get("palette.fontColor") or $fontColor;
+  $primary: get("palette.primary") or $primary;
+  $secondary: get("palette.secondary") or $secondary;
+  $info: get("palette.info") or $info;
+  $error: get("palette.error") or $error;
+  $warning: get("palette.warning") or $warning;
+  $success: get("palette.success") or $success;
+  $disabled: get("palette.disabled") or $disabled;
+  $active: get("palette.active") or $active;
+  $gray: get("palette.gray") or $gray;
+}

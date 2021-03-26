@@ -1,3 +1,5 @@
+version: '2'
+
 x-backend: &backend
   build:
     context: .
@@ -29,6 +31,6 @@ services:
 
   frontend:
     <<: *frontend
-    command: nodemon npm start
+    command: npm run start
     ports:
       - 3000:3000
