@@ -42,6 +42,7 @@ async def tours(
     for tour, score in tours_scores:
         tour_info__ = list(filter(lambda x: x["name"] == tour, tours_info_))[0]
         tour_info__["annotations"] = [f"CatBoost ranker score: {score}"]
+        tour_info__["score"] = score
         result.append(tour_info__)
 
     return result
