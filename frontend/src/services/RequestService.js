@@ -1,9 +1,10 @@
 import MyError from '@/services/MyError';
 
 export default class RequestService {
-  constructor(networkService, recommendationStore) {
+  constructor(networkService, recommendationStore, filterStore) {
     this.networkService = networkService;
     this.recommendationStore = recommendationStore;
+    this.filterStore = filterStore;
   }
 
   checkResponse = res => !(res instanceof MyError);
@@ -20,7 +21,7 @@ export default class RequestService {
   async getCountries(){
     const res = await this.networkService.fetch('countries',null, "GET");
     if (this.checkResponse(res)) {
-      console.log(res);
+      this.filterStore.setCountries(res);
     } else {
       throw res;
     }

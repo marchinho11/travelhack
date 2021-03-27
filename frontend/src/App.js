@@ -25,6 +25,8 @@ class App extends React.Component {
     this.stores = {
       [StoresNames.LoaderStore]: this.loaderStore,
       [StoresNames.RecommendationStore]: this.recommendationStore,
+      [StoresNames.RecommendationStore]: this.recommendationStore,
+      [StoresNames.FilterStore]: this.filterStore,
       [StoresNames.URL]: endpoint,
     };
 

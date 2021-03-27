@@ -14,13 +14,15 @@ export default class NetworkService {
   async checkResponse(res) {
     let response;
     this.loaderStore.setLoader(null);
+
     if (res.status === 500) {
       response = new MyError({ detail: 'Внутренняя ошибка сервера' });
     } else if (res instanceof Error) {
       response = new MyError({ detail: res.message });
     } else {
       response = await res.json();
-      response = (response.success) ? response.result : new MyError(response.error);
+      return response;
+      //response = (response.success) ? response.result : new MyError(response.error);
     }
 
     return response;

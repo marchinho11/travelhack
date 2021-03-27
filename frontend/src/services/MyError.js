@@ -1,6 +1,6 @@
 export default class MyError {
-  constructor({ statusCode, detail }) {
-    this.statusCode = statusCode || 'Oops';
+  constructor({ status, detail }) {
+    this.statusCode = status || 'Oops';
     this.message = detail;
     this.description = this.getDescription();
   }
