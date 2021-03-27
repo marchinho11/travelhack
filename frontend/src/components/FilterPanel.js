@@ -84,6 +84,7 @@ class FilterPanel extends React.Component {
               renderInput={(params) => (
                 <TextField
                   {...params}
+                  label={"Выберите страну"}
                   key="Asynchronous"
                   variant="outlined"
                   InputProps={{

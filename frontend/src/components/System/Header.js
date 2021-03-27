@@ -73,6 +73,7 @@ class Header extends React.Component {
                 renderInput={(params) => (
                   <TextField
                     {...params}
+                    label={"Выберите пользователя"}
                     key="Asynchronous"
                     variant="outlined"
                     InputProps={{
