@@ -13,7 +13,7 @@ import FilterStore from "./stores/FilterStore";
 class App extends React.Component {
   constructor(props) {
     super(props);
-    const endpoint = "http://localhost:3000/"
+    const endpoint = "http://localhost:8080"
     this.loaderStore = new LoaderStore();
     this.recommendationStore = new RecommendationStore();
     this.filterStore = new FilterStore();
