@@ -70,6 +70,9 @@ class FilterPanel extends React.Component {
                   {option.value}
                 </React.Fragment>
               )}
+              onChange={(el, value) => {
+                console.log(value);
+              }}
               renderInput={(params) => (
                 <TextField
                   {...params}
