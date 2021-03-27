@@ -108,10 +108,10 @@ class FilterPanel extends React.Component {
             />
   
             <div className={"d-flex flex-row justify-content-between"}>
-              <Button variant={"light"} style={{padding: "0px"}} onClick={() => {
+              <Button variant={"link"} style={{padding: "0px"}} onClick={() => {
                 this.setState(this.getDefaultState());
               }}>Очистить</Button>
-              <Button variant={"success"} onClick={() => {
+              <Button variant={"primary"} onClick={() => {
                 this.props.services.requestService.getTourList({...this.state});
               }}>Найти</Button>
             </div>
@@ -123,4 +123,4 @@ class FilterPanel extends React.Component {
   }
 }
 
-export default inject("services", StoresNames.FilterStore)(withStyles(styles)((observer(FilterPanel))));
+export default inject("services", StoresNames.FilterStore)(withStyles(styles)((observer(FilterPanel))))

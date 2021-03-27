@@ -23,7 +23,7 @@ class Header extends React.Component {
 
     return (
       <>
-        <Navbar bg="light" expand="lg">
+        <Navbar expand="lg">
           <Navbar.Brand href="#home">
             <img src={"https://www.tui.ru/images-new/svg/tui-logo.svg"} alt="logo"/>
           </Navbar.Brand>
@@ -37,37 +37,6 @@ class Header extends React.Component {
         </Navbar>
         <hr/>
       </>
-
-
-      // <div className="header">
-      //   <div className="headerLine">
-      //     <div>
-      //       <a
-      //         className="logo"
-      //         onClick={() => {
-      //           this.props.history.push('/home');
-      //         }}
-      //       >
-      //
-      //         <span className="logo">БизнесАтом</span>
-      //       </a>
-      //       <div className="form-group mb-0">
-      //         <input type="text" className="form-control" placeholder="Search.." />
-      //         <IconButton>
-      //           <SearchIcon style={{ color: 'white' }} />
-      //         </IconButton>
-      //       </div>
-      //     </div>
-      //     <div>
-      //       <IconButton onClick={() => { this.props.history.push('/home/account'); }}>
-      //         <PersonIcon style={{ color: 'white' }} />
-      //       </IconButton>
-      //       <IconButton onClick={() => { localStorage.clear(); window.location.reload(); }}>
-      //         <ExitToAppIcon style={{ color: 'white' }} />
-      //       </IconButton>
-      //     </div>
-      //   </div>
-      // </div>
     );
   }
 }

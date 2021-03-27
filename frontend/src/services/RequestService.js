@@ -12,8 +12,7 @@ export default class RequestService {
   async getTourList(filters) {
     const res = await this.networkService.fetch('tours', filters);
     if (this.checkResponse(res)) {
-      console.log(res);
-      //this.recommendationStore.setList(res);
+      this.recommendationStore.setList(res);
     } else {
       throw res;
     }

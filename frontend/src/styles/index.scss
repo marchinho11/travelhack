@@ -6,49 +6,16 @@
   outline: none !important;
 }
 
-
-button, a{
-  cursor: pointer;
+.maxSize{
+  width: 100%;
+  height: 100%;
 }
-button{
-  border-radius: 3px;
-}
-.form-control:focus{
-  color: #495057;
-  background-color: #fff;
-  border-color: $primary;
-  outline: 0;
-  box-shadow: none;
-}
-
-.SaveButton{
-  button{
-    background-color: $success;
-    border: none;
-    color: white;
-  }
-}
-
-.btn-light{
-  color: #212529;
-  background-color: $white;
-  border: 1px solid transparent;
-  padding: .375rem .75rem;
-}
-.btn-light:hover{
-  background-color: rgba(0, 0, 0, 0.04);
-  border-color: rgba(0, 0, 0, 0.04);
-}
-
-
 
 html,body, #root{
   width: 100%;
   height: 100%;
-  background-attachment: scroll;
-  background-clip: border-box;
-  background-color: rgb(249, 249, 249);
 }
+
 
 .dialog,
 .dialog__overlay {

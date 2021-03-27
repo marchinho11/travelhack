@@ -44,7 +44,7 @@ class HomePage extends React.Component {
                     <div className="table-responsive">
                       {this.store.list.map(el => {
                         return(
-                            <TourCard/>
+                            <TourCard {...el}/>
                         )
                       })}
                     </div>
@@ -61,4 +61,4 @@ class HomePage extends React.Component {
   }
 }
 
-export default inject("services", StoresNames.RecommendationStore)(observer(HomePage));
+export default inject("services", StoresNames.RecommendationStore)(observer(HomePage))
