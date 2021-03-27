@@ -15,14 +15,19 @@ import {Grid} from "@material-ui/core";
 class SlideMenu  extends  React.Component{
   constructor(props) {
     super(props);
-    this.state = {
+    this.state = this.getDefaultState();
+    this.store = this.props[StoresNames.FilterStore];
+  }
+  
+  getDefaultState(){
+    return {
       user_id: null,
       openUsers: null,
       gender: null,
       age: null,
     }
-    this.store = this.props[StoresNames.FilterStore];
   }
+  
   
   update(key, value){
     this.setState({[key]: value})
@@ -45,8 +50,10 @@ class SlideMenu  extends  React.Component{
                 this.setState({openUsers: true})
               })
             }}
+            
             onClose={() => {
               this.setState({openUsers: false})
+              this.getDefaultState();
             }}
             value={this.store.users.find(el => el.user_id ===this.state.user_id) || null}
             getOptionSelected={(option, value) => option.user_id === value}
@@ -59,7 +66,7 @@ class SlideMenu  extends  React.Component{
             )
             }
 
-            onChange={(e, obj) => {this.update("user_id", obj.user_id)}}
+            onChange={(e, obj) => {this.update("user_id", obj?.user_id)}}
             renderInput={(params) => (
               <TextField
                 {...params}
