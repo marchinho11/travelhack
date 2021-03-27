@@ -7,12 +7,6 @@ from fastapi import APIRouter, Depends
 router = APIRouter(prefix="/api")
 
 
-@router.get("/countries")
-async def countries(df=Depends(get_df)):
-    unique_countries = list(df["Страна тура"].dropna().unique())
-    return unique_countries
-
-
 @router.post("/tours")
 async def tours(filters: Filters, df=Depends(get_df)):
     df_ = df[df["Страна тура"] == filters.country][
