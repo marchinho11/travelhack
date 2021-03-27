@@ -139,6 +139,7 @@ html,body, #root{
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 16px;
   div{
     display: flex;
     justify-content: center;
@@ -212,6 +213,9 @@ html,body, #root{
 .filtersPanel{
   >*{
     margin: 8px 0px;
+  }
+  h4{
+    margin-bottom: 16px;
   }
 }
 

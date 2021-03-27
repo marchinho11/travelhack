@@ -47,10 +47,17 @@ class Header extends React.Component {
               </Form>
             </Navbar.Collapse>
           </Navbar>
-          <IconButton className={"ml-auto mr-4"} style={{transform: "translate(0, 8px)"}} disableRipple={true} disableFocusRipple={true} onClick={() => {this.handleDrawerClick()}}>
-            <MenuIcon/>
-          </IconButton>
-          <SlideMenu open={this.state.open} handleDrawerClick={() => this.handleDrawerClick()}/>
+          <div className={"ml-auto d-flex flex-row align-items-center"}>
+            {this.store.currentUser.user_id && <div className={"d-flex flex-row align-items-center"}>
+              <AccountCircle className={"mr-2"}/>
+              <span>{this.store.currentUser.user_id}</span>
+            </div>}
+            <IconButton className={"ml-4 mr-4"} disableRipple={true} disableFocusRipple={true} onClick={() => {this.handleDrawerClick()}}>
+              <MenuIcon/>
+            </IconButton>
+            <SlideMenu open={this.state.open} handleDrawerClick={() => this.handleDrawerClick()}/>
+          </div>
+
         </div>
         <hr/>
       </>

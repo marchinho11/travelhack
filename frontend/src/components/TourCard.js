@@ -8,7 +8,6 @@ export default class TourCard extends React.Component{
     
 
     render() {
-        console.log(this.props.food_type)
         return(
         <Card className={"flex-row mb-4"}>
             <Card.Img className={"p-4"} variant="left" src="https://lh3.googleusercontent.com/proxy/IuiOcqpm_6jgFp-beOcmqfwaLrbsT4D7n3RvN6J2aWcLkD6vqQgMd964mQQCewRgi1bn0TNGALTDBLF_exhmqS6LeSijKSxR6mmIJDwXG9u9og"/>

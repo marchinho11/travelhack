@@ -55,13 +55,13 @@ class FilterPanel extends React.Component {
         <h2 className="grid-title">
           <i className="fa fa-filter" />
           {' '}
-          Filters
+          Фильтры
         </h2>
         <hr />
         {/* BEGIN FILTER BY CATEGORY */}
         <Card>
           <Card.Body className="filtersPanel">
-            <h4>By category:</h4>
+            <h4>Категории:</h4>
             <Autocomplete
               open={this.state.openCountries}
               onOpen={() => {
@@ -120,7 +120,8 @@ class FilterPanel extends React.Component {
                 this.setState(this.getDefaultState());
               }}>Очистить</Button>
               <Button variant={"primary"} onClick={() => {
-                this.props.services.requestService.getTourList({...this.state});
+                this.store.setFilterPanel({...this.state})
+                this.props.services.requestService.getTourList();
               }}>Найти</Button>
             </div>
           </Card.Body>

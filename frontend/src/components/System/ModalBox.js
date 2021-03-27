@@ -1,35 +1,37 @@
 import React from 'react';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import MuiDialogTitle from '@material-ui/core/DialogTitle';
+import MuiDialogActions from '@material-ui/core/DialogActions';
+import { withStyles } from '@material-ui/core/styles';
+import { observer } from 'mobx-react';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+import Typography from '@material-ui/core/Typography';
+import {DialogContent} from "@material-ui/core";
 
-
-// export default class ModalBox extends React.Component {
-//
-//   render() {
-//     return (
-//       <div id="somedialog" className={this.props.openDialog ? 'dialog dialog--open' : 'dialog'}>
-//         <div className="dialog__overlay" onClick={() => this.props.closeDialog()} />
-//         <div className="dialog__content">
-//           {this.props.children}
-//         </div>
-//       </div>
-//     );
-//   }
-// }
-
-export default class Demo extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      backdrop: false,
-      show: false
-    };
+const styles = (theme) => ({
+  layout: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   }
+});
 
+
+class ModalBox extends React.PureComponent {
   render() {
+    const classes = this.props.classes;
     return (
-      // <Modal show={this.props.openDialog} onHide={() => this.props.closeDialog()}>
-      //   {this.props.children}
-      // </Modal>
-      <></>
+      <Dialog maxWidth="lg" onClose={() => this.props.closeDialog()} aria-labelledby="customized-dialog-title" open={this.props.show}>
+        <DialogContent>
+          {this.props.children}
+        </DialogContent>
+      </Dialog>
     );
   }
 }
+
+// @ts-ignore
+export default withStyles(styles)(observer(ModalBox));
