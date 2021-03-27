@@ -29,22 +29,6 @@ class HomePage extends React.Component {
                   {/* END FILTERS */}
                   {/* BEGIN RESULT */}
                   <div className="col-md-9">
-                    <h2>
-                      <i className="fa fa-file-o" />
-                      {' '}
-                      Result
-                    </h2>
-                    <hr />
-                    {/* BEGIN SEARCH INPUT */}
-                    <div className="input-group">
-                      <input type="text" className="form-control" defaultValue="web development" />
-                      <span className="input-group-btn">
-                        <button className="btn btn-primary" type="button"><i className="fa fa-search" /></button>
-                      </span>
-                    </div>
-                    {/* END SEARCH INPUT */}
-                    <p>Showing all results matching "web development"</p>
-                    <div className="padding" />
                     <div className="row">
                       {/* BEGIN ORDER RESULT */}
                       <div className="col-sm-6">
