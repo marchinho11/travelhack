@@ -1,4 +1,5 @@
 import json
+import math
 import pickle
 
 import numpy as np
@@ -6,6 +7,11 @@ import pandas as pd
 from loguru import logger
 from sklearn.preprocessing import LabelEncoder
 from tqdm import tqdm
+
+
+def roundup(x):
+    return int(math.ceil(x / 100.0)) * 100
+
 
 # TODO: excel
 logger.debug("Чтение датафрейма")
@@ -136,6 +142,9 @@ def tour_features(df_):
             "Сумма в $_mean",
         ]
     ].fillna("")
+    tour_info_["Сумма в $_mean"] = tour_info_["Сумма в $_mean"].apply(
+        lambda x: roundup(x)
+    )
     tour_info_.columns = ["name", "country", "stars", "price"]
     tour_info_ = tour_info_.to_json(force_ascii=False, orient="records")
     res.fillna(res.mean(), inplace=True)
