@@ -1,6 +1,7 @@
 import {
   action, computed, makeObservable, observable, toJS
 } from 'mobx';
+import TourModel from "../model/TourModel";
 
 class RecommendationStore {
   list = [];
@@ -12,8 +13,8 @@ class RecommendationStore {
     });
   }
 
-  setList() {
-
+  setList(list) {
+    this.list = list.map(el => new TourModel(el))
   }
 }
 

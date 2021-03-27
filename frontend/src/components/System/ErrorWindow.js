@@ -34,7 +34,7 @@ export default class ErrorWindow extends React.Component {
   getErrorWindow() {
     return (
       this.state.openDialog && (
-        <ModalBox openDialog={this.state.openDialog} closeDialog={this.closeDialog}>
+        <ModalBox show={this.state.openDialog} closeDialog={this.closeDialog}>
           <div className="errorWindow">
             <div>
               <ErrorIcon color="error" fontSize="large" />

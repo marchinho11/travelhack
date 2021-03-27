@@ -8,21 +8,25 @@ import LoaderStore from '@/stores/LoaderStore';
 import ErrorWindow from '@/components/System/ErrorWindow';
 import Loader from '@/components/System/Loader';
 import RecommendationStore from '@/stores/RecommendationStore';
+import FilterStore from "./stores/FilterStore";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    const endpoint = this.getCheckAppMode(APPMODE);
+    const endpoint = "http://localhost:8080"
     this.loaderStore = new LoaderStore();
     this.recommendationStore = new RecommendationStore();
-    this.networkService = new NetworkService({ endpoint, appStore: this.appStore });
-    this.requestService = new RequestService(this.networkService);
+    this.filterStore = new FilterStore();
+    this.networkService = new NetworkService({ endpoint, loaderStore: this.loaderStore });
+    this.requestService = new RequestService(this.networkService, this.recommendationStore, this.filterStore);
 
     this.networkService.setToken(localStorage.token || 'token');
 
     this.stores = {
       [StoresNames.LoaderStore]: this.loaderStore,
       [StoresNames.RecommendationStore]: this.recommendationStore,
+      [StoresNames.RecommendationStore]: this.recommendationStore,
+      [StoresNames.FilterStore]: this.filterStore,
       [StoresNames.URL]: endpoint,
     };
 

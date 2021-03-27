@@ -7,7 +7,7 @@
   "license": "ISC",
   "private": true,
   "scripts": {
-    "start": "cross-env NODE_ENV=development webpack-dev-server --host 0.0.0.0 --inline --content-base .",
+    "start": "webpack-dev-server --host 0.0.0.0 --inline --content-base .",
     "build": "cross-env NODE_ENV=production npx webpack --mode production",
     "lint": "eslint \"src/**/*.js\""
   },
@@ -60,17 +60,21 @@
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.57",
+    "a11y-react-emoji": "^1.1.3",
     "bootstrap": "^4.6.0",
     "cross-env": "^7.0.2",
     "dotenv": "^8.2.0",
     "mobx": "^6.0.4",
     "mobx-react": "^7.0.5",
     "mobx-react-devtools": "^6.0.1",
+    "moment": "^2.29.1",
     "react": "^17.0.1",
     "react-bootstrap": "^1.5.2",
+    "react-dates": "^21.8.0",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.1",
+    "react-stars": "^2.2.5",
     "url": "^0.11.0"
   }
 }

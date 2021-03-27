@@ -24,25 +24,24 @@
 
 html button, html input, html optgroup, html select, html textarea, label, a, span, i {
   font-family: OpenSans-Regular, sans-serif !important;
-  font-size: 100% !important;
-  margin: 0 !important;
 }
 
 
-.logo{
-  font-size: 16px !important;
-  text-align: center !important;
+.cardLabel{
+  font-size: 18px;
+  line-height: 24px;
+  font-family: OpenSans-Regular;
+  font-family: OpenSans-SemiBold, serif !important;
+  color: #3757c5;
+}
+
+.tourPrice{
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 21px;
   font-family: OpenSans-SemiBold, serif !important;
 }
 
-
-.GuestPage{
-  html button, html input, html optgroup, html select, html textarea {
-    font-family: 'Gilroy-Black';
-    font-size: 100%;
-    margin: 0;
-  }
-}
 
 .textMuted{
   color: #9ca8b3 !important;
@@ -52,6 +51,10 @@ html button, html input, html optgroup, html select, html textarea, label, a, sp
   font-size: 13px !important;
   font-weight: 400;
   line-height: 1.5;
+}
+
+.emojiLine{
+  font-size: 30px;
 }
 
 

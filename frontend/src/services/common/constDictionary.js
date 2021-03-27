@@ -1,5 +1,6 @@
 export const StoresNames = {
   RecommendationStore: 'RecommendationStore',
+  FilterStore: "FilterStore",
   LoaderStore: 'LoaderStore',
   URL: 'URL'
 };
