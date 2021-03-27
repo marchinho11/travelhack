@@ -1,24 +1,18 @@
-import json
+import random
 
-from app.dependencies import get_df
+from app.dependencies import tours_info, users_info
 from fastapi import APIRouter, Depends
 
 router = APIRouter(prefix="/api")
 
 
 @router.get("/countries")
-async def countries(df=Depends(get_df)):
-    unique_countries = list(df["Страна тура"].dropna().unique())
-    return unique_countries
+async def countries(tours_info_=Depends(tours_info)):
+    countries_ = list(set(tour["country"] for tour in tours_info_))
+    return countries_
 
 
 @router.get("/users")
-async def users(df=Depends(get_df)):
-    users_info = df[["ИД клиента", "Пол", "Возраст клиента"]]
-    users_info.columns = ["user_id", "gender", "age"]
-    users_info = json.loads(
-        users_info.drop_duplicates()
-        .sample(10)
-        .to_json(force_ascii=False, orient="records")
-    )
-    return users_info
+async def users(users_info_=Depends(users_info)):
+    users_info__ = random.sample(users_info_, 10)
+    return users_info__

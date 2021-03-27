@@ -1,1 +1,1 @@
-from .df import get_df
+from .filters import get_df, tours_info, users_info
