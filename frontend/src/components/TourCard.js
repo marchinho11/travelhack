@@ -15,9 +15,10 @@ export default class TourCard extends React.Component{
             <Card.Body className={"pl-0"}>
                 <section className={"d-flex flex-row justify-content-between"}>
                     <div className={"d-flex flex-column"}>
-                        <div className={"d-flex flex-row flex-wrap"}>
-                            <Card.Title className={"cardLabel mb-0"}>{this.props.name}</Card.Title>
+                        <div className={"d-flex flex-row flex-wrap align-items-center"}>
+                            <Card.Title className={"cardLabel mb-0 mr-2"}>{this.props.name}</Card.Title>
                             <ReactStars
+                              className={"mr-2"}
                               edit={false}
                               count={5}
                               value={this.props.stars}
@@ -27,15 +28,15 @@ export default class TourCard extends React.Component{
                         </div>
                         <div className={"d-flex flex-row justify-content-between"}>
                             <div className="descriptionCard d-flex flex-column">
-                                <span>Еда: {this.props.food_type}</span>
-                                <span>Еда: {this.props.food_type}</span>
-                                <span>Еда: {this.props.food_type}</span>
+                                <span>еда: {this.props.food_type}</span>
+                                <span>еда: {this.props.food_type}</span>
+                                <span>еда: {this.props.food_type}</span>
                             </div>
                         </div>
                     </div>
                     <div className="activeCard d-flex flex-column">
                         <span className={"tourPrice mb-4 text-center"}>10 000 ₽</span>
-                        <Button variant="success">Заказать тур</Button>
+                        <Button variant="success">Заказать</Button>
                     </div>
                 </section>
             </Card.Body>

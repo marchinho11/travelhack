@@ -16,11 +16,27 @@ html,body, #root{
   height: 100%;
 }
 
+.MuiIconButton-root{
+  padding: 0 !important;
+  &:hover{
+    background-color: rgba(0,0,0,0) !important;
+  }
+}
+
 .card{
   img{
     max-width: 300px;
     max-height: 300px;
   }
+}
+.bm-burger-button{
+  width: 25px;
+  height: 25px;
+  background: red;
+}
+
+.activeCard{
+  min-width: 100px;
 }
 
 .dialog,
