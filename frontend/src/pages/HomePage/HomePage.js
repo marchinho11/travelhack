@@ -2,8 +2,9 @@ import React from 'react';
 import './HomePage.scss';
 import { inject, observer } from 'mobx-react';
 import { StoresNames } from '@/services/common/constDictionary';
-import FilterPanel from '@/components/FilterPanel/FilterPanel';
+import FilterPanel from '@/components/FilterPanel';
 import TourCard from "../../components/TourCard";
+import FilterRow from "../../components/FilterRow";
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -34,22 +35,7 @@ class HomePage extends React.Component {
                   <div className="col-md-9">
                     <div className="row filterRow">
                       {/* BEGIN ORDER RESULT */}
-                      <div className="_3_l6GZZNkG"><span className="n-filter-sorter__label">Сортировать:</span>
-                        <button className="filters" data-autotest-id="dpop" data-tid="826e0c9f">по популярности
-                        </button>
-                        <button className="filters" data-autotest-id="aprice"
-                                data-tid="826e0c9f">по цене
-                        </button>
-                        <button className="filters" data-autotest-id="quality" data-tid="826e0c9f">по рейтингу
-                        </button>
-                        <button className="filters" data-autotest-id="opinions" data-tid="826e0c9f">по отзывам
-                        </button>
-                        <button className="filters" data-autotest-id="discount_p" data-tid="826e0c9f">по размеру
-                          скидки
-                        </button>
-                        <button className="filters" data-autotest-id="ddate" data-tid="826e0c9f">по новизне
-                        </button>
-                      </div>
+                      <FilterRow/>
                       {/* END ORDER RESULT */}
                       <div className="col-md-6 text-right">
                         <div className="btn-group">
