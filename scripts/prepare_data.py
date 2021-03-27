@@ -144,6 +144,9 @@ def tour_features(df_):
         "Страна тура",
     ]
     res[cat_features] = res[cat_features].astype("int")
+    res.columns = [
+        "tour_" + col if col != "Наименование тура" else col for col in res.columns
+    ]
     return res, tour_info_
 
 
@@ -192,7 +195,7 @@ def user_features(df_):
         "Тип заявки_last",
     ]
     agg[cat_features] = agg[cat_features].astype("int")
-
+    agg.columns = ["user_" + col if col != "ИД клиента" else col for col in agg.columns]
     return agg, users_info_
 
 
@@ -200,7 +203,7 @@ df_user, users_info_ = user_features(df)
 with open("backend/data/users_info.json", "w") as f_out:
     f_out.write(users_info_)
 
-logger.debug("Данные бля обучения ранжированию")
+logger.debug("Данные для обучения ранжированию")
 
 
 def ranking_data(df_):
@@ -232,12 +235,15 @@ X = df_ranking[
             "ИД клиента_nunique",
             "ИД клиента_len",
             "Ночей_mean_y",
+            "target",
         ]
     )
 ]
 y = df_ranking["target"].values
 logger.debug("Сохранение данных")
 X.to_csv("backend/data/ranking_x.csv")
+df_user.to_csv("backend/data/df_user.csv")
+df_tour.to_csv("backend/data/df_tour.csv")
 with open("backend/data/ranking_y.pkl", "wb") as f_out:
     pickle.dump(y, f_out)
 
