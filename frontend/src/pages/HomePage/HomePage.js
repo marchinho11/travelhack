@@ -15,10 +15,6 @@ class HomePage extends React.Component {
     };
   }
 
-  componentDidMount() {
-    this.props.services.requestService.getTourList();
-  }
-
   render() {
     return (
       <div className="container">

@@ -7,7 +7,7 @@ import { withStyles } from '@material-ui/core/styles';
 import 'react-dates/initialize';
 import { DateRangePicker, SingleDatePicker, DayPickerRangeController } from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
-import {Card} from "react-bootstrap";
+import {Button, ButtonGroup, Card} from "react-bootstrap";
 
 // ISO 3166-1 alpha-2
 // ⚠️ No support for IE 11
@@ -29,12 +29,21 @@ class FilterPanel extends React.Component {
   constructor(props) {
     super(props);
     this.store = this.props[StoresNames.FilterStore];
-    this.state = {
-      current: null,
-      openCountries: false,
-    };
+    this.state = this.getDefaultState();
   }
-
+  
+  
+  getDefaultState(){
+    return {
+      openCountries: false,
+      country: ""
+    }
+  }
+  
+  update(key, value){
+    this.setState({[key]: value})
+  }
+  
   render() {
     const classes = this.props.classes;
 
@@ -61,6 +70,7 @@ class FilterPanel extends React.Component {
               onClose={() => {
                 this.setState({openCountries: false})
               }}
+              value={this.store.countries.find(el => el.value ===this.state.country) || null}
               getOptionSelected={(option, value) => option.value === value.value}
               getOptionLabel={(option) => option.value}
               options={this.store.countries}
@@ -70,9 +80,7 @@ class FilterPanel extends React.Component {
                   {option.value}
                 </React.Fragment>
               )}
-              onChange={(el, value) => {
-                console.log(value);
-              }}
+              onChange={(e, element) => {this.update("country", element.value)}}
               renderInput={(params) => (
                 <TextField
                   {...params}
@@ -98,6 +106,15 @@ class FilterPanel extends React.Component {
                 focusedInput={this.state.focusedInput || null} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
                 onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
             />
+  
+            <div className={"d-flex flex-row justify-content-between"}>
+              <Button variant={"light"} style={{padding: "0px"}} onClick={() => {
+                this.setState(this.getDefaultState());
+              }}>Очистить</Button>
+              <Button variant={"success"} onClick={() => {
+                this.props.services.requestService.getTourList({...this.state});
+              }}>Найти</Button>
+            </div>
           </Card.Body>
         </Card>
       </div>

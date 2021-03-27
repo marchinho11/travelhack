@@ -9,13 +9,14 @@ export default class RequestService {
 
   checkResponse = res => !(res instanceof MyError);
 
-  async getTourList() {
-    // const res = await this.networkService.fetch('signin', { email, password });
-    // if (this.checkResponse(res)) {
-    //   this.recommendationStore.setList(res);
-    // } else {
-    //   throw res;
-    // }
+  async getTourList(filters) {
+    const res = await this.networkService.fetch('tours', filters);
+    if (this.checkResponse(res)) {
+      console.log(res);
+      //this.recommendationStore.setList(res);
+    } else {
+      throw res;
+    }
   }
   
   async getCountries(){
