@@ -8,9 +8,7 @@ import Drawer from "@material-ui/core/Drawer";
 import {withRouter} from "react-router-dom";
 import {inject, observer} from "mobx-react";
 import {StoresNames} from "../services/common/constDictionary";
-import man from "../../public/static/icons/man.svg"
-import woman from "../../public/static/icons/woman.svg"
-import {Grid} from "@material-ui/core";
+import Emoji from 'a11y-react-emoji'
 
 class SlideMenu  extends  React.Component{
   constructor(props) {
@@ -90,8 +88,8 @@ class SlideMenu  extends  React.Component{
             )}
           />
           {user.gender &&
-            <div className={"d-flex flex-row"} style={{alignItems: "flex-start"}}>
-              <img src={(user.gender === "man")? man: woman} className={"mr-2"} alt="" width={"25px"} height={"25px"}/>
+            <div className={"emojiLine d-flex flex-row align-items-center"} style={{alignItems: "flex-start"}}>
+              <Emoji symbol={(user.gender === "женский")? "👸": "👲"}/>
               <h5 className={"font-weight-bold"}>{user.gender}</h5>
             </div>
           }
