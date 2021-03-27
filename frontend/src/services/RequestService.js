@@ -1,4 +1,6 @@
 import MyError from '@/services/MyError';
+import config from "../stores/config";
+// import yapic from "yandex-pictures"
 
 export default class RequestService {
   constructor(networkService, recommendationStore, filterStore) {
@@ -12,6 +14,16 @@ export default class RequestService {
   async getTourList() {
     const res = await this.networkService.fetch('tours', this.filterStore.filterPanel);
     if (this.checkResponse(res)) {
+      const tours = res?.map(tour => {
+        // const country = config.countries.find(el => el.value === tour.country);
+        // yapic.getImage({
+        //   text: tour.name,
+        //   count: 2
+        // }).then((data) => {
+        //   debugger;
+        // })
+
+      })
       this.recommendationStore.setList(res);
     } else {
       throw res;

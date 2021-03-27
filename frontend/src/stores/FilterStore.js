@@ -16,6 +16,7 @@ export default class FilterStore {
             value: "price"
         },
         {
+            ascending: "top",
             active: false,
             name: "по релевантности",
             value: "score"
