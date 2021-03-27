@@ -1,9 +1,9 @@
 import MyError from '@/services/MyError';
 
 export default class NetworkService {
-  constructor({ endpoint, appStore, handleTokenErrors }) {
+  constructor({ endpoint, loaderStore, handleTokenErrors }) {
     this.endpoint = `${endpoint}/api/`;
-    this.appStore = appStore;
+    this.loaderStore = loaderStore;
     this.handleTokenErrors = handleTokenErrors;
   }
 
@@ -13,7 +13,7 @@ export default class NetworkService {
 
   async checkResponse(res) {
     let response;
-    this.appStore.setLoader(null);
+    this.loaderStore.setLoader(null);
     if (res.status === 500) {
       response = new MyError({ detail: 'Внутренняя ошибка сервера' });
     } else if (res instanceof Error) {
@@ -33,14 +33,14 @@ export default class NetworkService {
    * @param {Object} extra - экстра параметры file, multipart
    */
   fetch = (alias, parameters, type = 'POST') => {
-    // this.appstore.setIsBlocked(true);
+    // this.loaderStore.setIsBlocked(true);
     this.options = {
       method: type,
       headers: this.buildHeaders(),
     };
 
     if (parameters) this.options.body = JSON.stringify(parameters);
-    this.appStore.startLoader();
+    this.loaderStore.startLoader();
     return fetch(`${this.endpoint}${alias}`, this.options)
       .then(response => this.checkResponse(response))
       .catch(err => this.checkResponse(err));

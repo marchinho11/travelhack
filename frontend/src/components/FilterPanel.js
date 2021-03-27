@@ -304,7 +304,9 @@ class FilterPanel extends React.Component {
             <Autocomplete
               open={this.state.openCountries}
               onOpen={() => {
-                this.setState({openCountries: true})
+                this.props.services.requestService.getCountries().then(() => {
+                  this.setState({openCountries: true})
+                })
               }}
               onClose={() => {
                 this.setState({openCountries: false})
@@ -351,4 +353,4 @@ class FilterPanel extends React.Component {
   }
 }
 
-export default inject(StoresNames.RecommendationStore)(withStyles(styles)((observer(FilterPanel))));
+export default inject("services", StoresNames.RecommendationStore)(withStyles(styles)((observer(FilterPanel))));
