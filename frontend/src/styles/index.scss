@@ -16,6 +16,12 @@ html,body, #root{
   height: 100%;
 }
 
+.card{
+  img{
+    max-width: 300px;
+    max-height: 300px;
+  }
+}
 
 .dialog,
 .dialog__overlay {

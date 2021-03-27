@@ -31,8 +31,16 @@ html button, html input, html optgroup, html select, html textarea, label, a, sp
 .cardLabel{
   font-size: 18px;
   line-height: 24px;
+  font-family: OpenSans-Regular;
   font-family: OpenSans-SemiBold, serif !important;
   color: #3757c5;
+}
+
+.tourPrice{
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 21px;
+  font-family: OpenSans-SemiBold, serif !important;
 }
 
 
