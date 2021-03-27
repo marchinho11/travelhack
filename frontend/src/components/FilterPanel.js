@@ -13,7 +13,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 
 // ISO 3166-1 alpha-2
 // ⚠️ No support for IE 11
-function countryToFlag(isoCode) {
+export function countryToFlag(isoCode) {
   return typeof String.fromCodePoint !== 'undefined'
       ? isoCode
           .toUpperCase()
