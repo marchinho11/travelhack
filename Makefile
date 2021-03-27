@@ -21,3 +21,9 @@ jupyter:
 restart:
 	docker-compose down
 	docker-compose up -d
+
+data:
+	poetry run python scripts/prepare_data.py
+
+fit:
+	poetry run python scripts/fit_models.py
