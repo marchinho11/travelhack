@@ -30,13 +30,17 @@ export default class TourCard extends React.Component{
                                 <span>еда: {this.props.food_type}</span>
                                 <span>еда: {this.props.food_type}</span>
                                 <span>еда: {this.props.food_type}</span>
+                                {this.props.annotations.map(el => (
+                                  <span className={"textMuted"}>{el}</span>
+                                ))}
                             </div>
                         </div>
                     </div>
                     <div className="activeCard d-flex flex-column">
-                        <span className={"tourPrice mb-4 text-center"}>10 000 ₽</span>
+                        <span className={"tourPrice mb-4 text-center"}>{this.props.price} $</span>
                         <Button variant="success">Заказать</Button>
                     </div>
+
                 </section>
             </Card.Body>
         </Card>

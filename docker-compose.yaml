@@ -25,7 +25,6 @@ services:
     working_dir: /backend
     expose:
       - 8080
-    env_file: backend/.env
     ports:
       - 8080:8080
 
