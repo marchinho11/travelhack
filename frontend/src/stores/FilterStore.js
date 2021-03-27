@@ -8,12 +8,37 @@ import FilterModel from "../model/FilterModel";
 export default class FilterStore {
     countries=[];
     users = [];
+    filterNames = [
+        {
+            ascending: "top",
+            active: false,
+            name: "по цене",
+            value: "price"
+        },
+        {
+            active: false,
+            name: "по релевантности",
+            value: "score"
+        },
+        {
+            ascending: "top",
+            active: false,
+            name: "по уровню обслуживания",
+            value: "stars"
+        },
+        // {
+        //     ascending: "top",
+        //     active: false,
+        //     name: "по времени"
+        // },
+    ];
     
     currentUser = new UserModel();
     filterPanel = new FilterModel();
     
     constructor() {
         makeObservable(this, {
+            filterNames:observable,
             users: observable,
             currentUser: observable,
             filterPanel: observable,
@@ -22,6 +47,7 @@ export default class FilterStore {
             setUsers: action,
             setCurrentUser: action,
             setFilterPanel: action,
+            setFilterNames: action,
         });
     }
     
@@ -43,5 +69,9 @@ export default class FilterStore {
     
     setFilterPanel(obj){
         this.filterPanel = new FilterModel({...obj, ...this.currentUser});
+    }
+    
+    setFilterNames(list){
+        this.filterNames = list;
     }
 }

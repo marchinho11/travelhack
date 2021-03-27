@@ -5,6 +5,7 @@ export default class TourModel {
     this.stars = obj?.stars;
     this.price = obj?.price;
     this.country = obj?.country;
+    this.score = obj?.score;
     this.annotations = obj?.annotations || [];
   }
 }

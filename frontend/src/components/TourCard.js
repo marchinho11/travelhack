@@ -48,6 +48,5 @@ export default class TourCard extends React.Component{
         </Card>
         )
     }
-
-
 }
+
