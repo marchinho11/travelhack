@@ -1,20 +1,11 @@
 @import "~@styles/colors.scss";
 @import '~@styles/fonts/fonts.scss';
-@import "~@styles/card.scss";
 
 
 * {
   outline: none !important;
 }
 
-.centerX{
-  display: flex;
-  justify-content: center;
-}
-.centerY{
-  display: flex;
-  align-items: center;
-}
 
 button, a{
   cursor: pointer;
@@ -58,191 +49,6 @@ html,body, #root{
   background-clip: border-box;
   background-color: rgb(249, 249, 249);
 }
-
-.maxSize{
-  height: 100%;
-  width: 100%;
-}
-
-
-.Auth{
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  .goBack{
-    position: absolute;
-    left: 16px;
-    top: 16px;
-  }
-
-  form{
-    display: flex;
-    border: none;
-    flex-direction: column;
-    background-color: $white;
-    border-radius: 10px;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 20px 0px;
-    padding: 1.25rem;
-    align-content: center;
-    min-width: 400px;
-    .logo{
-      padding: 16px 16px;
-    }
-    .center{
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 32px 16px;
-    }
-    .inputForm{
-      margin-bottom: 1rem;
-      display: flex;
-      flex-direction: column;
-      input{
-        display: block;
-        width: 100%;
-        height: calc(1.5em + .75rem + 2px);
-        padding: .375rem .75rem;
-        font-size: 1rem;
-        font-weight: 400;
-        line-height: 1.5;
-        color: #495057;
-        background-color: #fff;
-        background-clip: padding-box;
-        border: 1px solid #ced4da;
-        border-radius: .25rem;
-        transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-      }
-      input:invalid{
-        border: 1px solid red;
-      }
-      label{
-        padding: 8px;
-      }
-    }
-    button{
-      margin: 16px 0px;
-      width: 100%;
-      background-color: $primary;
-      border: 1px solid $primary;
-      border-radius: 3px;
-      padding: .5rem 1rem;
-      color: $white;
-    }
-    footer{
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      & :first-child {
-        text-decoration: underline #9ca8b3;
-      }
-      i{
-        text-decoration: none !important;
-        font-size: 16px;
-        text-align: center;
-        vertical-align: text-top;
-        padding: 0px 4px;
-      }
-    }
-  }
-}
-
-.header{
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  .headerLine{
-    height: 72px;
-    background: $primary;
-    color: $white;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-    align-items: center;
-    >div:first-child {
-      display: flex;
-      flex-direction: row;
-      align-content: center;
-      justify-content: center;
-      a{
-        padding: 0px 8px 0px 16px;
-        display: flex;
-        justify-content: flex-start;
-        flex-direction: row;
-        align-items: center;
-        *{
-          margin: 4px;
-        }
-      }
-      div{
-
-        position: relative;
-        input{
-          height: 34px;
-          padding-left: 18px;
-          padding-right: 40px;
-          margin-right: 16px;
-          background: rgba(255, 255, 255, 0.1);
-          -webkit-box-shadow: none;
-          box-shadow: none;
-          border-radius: 30px;
-          color: rgba(255, 255, 255, 1);
-          width: 200px;
-          border: none;
-        }
-        input::placeholder{
-          color: white;
-        }
-        input:focus{
-          height: 34px;
-          padding-left: 18px;
-          padding-right: 40px;
-          margin-right: 16px;
-          background: rgba(255, 255, 255, 0.1);
-          -webkit-box-shadow: none;
-          box-shadow: none;
-          border-radius: 30px;
-          color: rgba(255, 255, 255, 1);
-          width: 200px;
-          border: none;
-        }
-        button{
-          position: absolute;
-          left: 72%;
-          top: -7px;
-        }
-      }
-    }
-  }
-
-  nav{
-    background-color: #ffffff;
-    border-bottom: 2px solid rgba(53, 69, 88, 0.1);
-    width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
-    height: 56px;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    a{
-      color: rgba(53, 69, 88, 0.8);
-      line-height: 18px;
-      border-radius: 5px;
-      font-size: 14px;
-      padding: 0px 16px;
-    }
-    a:hover{
-      color: $primary !important;
-      text-decoration: underline !important;
-    }
-  }
-}
-
 
 .dialog,
 .dialog__overlay {
@@ -393,24 +199,28 @@ html,body, #root{
   }
 }
 
-.fileUploader{
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  border-width: 2px;
-  border-radius: 2px;
-  border-color: #eeeeee;
-  border-style: dashed;
-  background-color: #fafafa;
-  color: #bdbdbd;
-  outline: none;
-  transition: border .24s ease-in-out;
-  div{
-    cursor: pointer;
-  }
+.sticky{
+  position: sticky;
+  top: 0px;
 }
 
+.filterRow{
+  padding: 0px 15px;
+  .filters{
+    margin-left: 15px;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    color: #04b;
+    cursor: pointer;
+    outline: none;
+    font-family: YS Text,sans-serif;
+    font-size: 12.8px;
+    -webkit-transition: color .25s;
+    -o-transition: color .25s;
+    -moz-transition: color .25s;
+    transition: color .25s;
+  }
 
+}
 

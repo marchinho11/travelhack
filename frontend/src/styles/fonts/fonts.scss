@@ -25,7 +25,6 @@
 html button, html input, html optgroup, html select, html textarea, label, a, span, i {
   font-family: OpenSans-Regular, sans-serif !important;
   font-size: 100% !important;
-  margin: 0 !important;
 }
 
 
@@ -35,14 +34,6 @@ html button, html input, html optgroup, html select, html textarea, label, a, sp
   font-family: OpenSans-SemiBold, serif !important;
 }
 
-
-.GuestPage{
-  html button, html input, html optgroup, html select, html textarea {
-    font-family: 'Gilroy-Black';
-    font-size: 100%;
-    margin: 0;
-  }
-}
 
 .textMuted{
   color: #9ca8b3 !important;

@@ -3,7 +3,7 @@ import {
 } from 'mobx';
 
 class RecommendationStore {
-  list = [];
+  list = (new Array(100).fill(0));
 
   constructor() {
     makeObservable(this, {
@@ -12,7 +12,7 @@ class RecommendationStore {
     });
   }
 
-  setList() {
+  setList(list) {
 
   }
 }
