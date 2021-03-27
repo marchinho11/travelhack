@@ -9,13 +9,13 @@ x-backend: &backend
     - ./backend:/backend
 
 
-x-frontend: &frontend
-  build:
-    context: .
-    dockerfile: _docker/frontend/Dockerfile
-  image: frontend
-  volumes:
-    - ./frontend:/frontend
+#x-frontend: &frontend
+#  build:
+#    context: .
+#    dockerfile: _docker/frontend/Dockerfile
+#  image: frontend
+#  volumes:
+#    - ./frontend:/frontend
 
 
 services:
@@ -29,8 +29,8 @@ services:
     ports:
       - 8080:8080
 
-  frontend:
-    <<: *frontend
-    command: npm run start
-    ports:
-      - 3000:3000
+#  frontend:
+#    <<: *frontend
+#    command: npm run start
+#    ports:
+#      - 3000:3000
