@@ -218,6 +218,12 @@ html,body, #root{
   }
 }
 
+.filtersPanel{
+  *{
+    margin: 4px 0px;
+  }
+}
+
 .DateRangePicker_picker{
   z-index: 10000;
 
