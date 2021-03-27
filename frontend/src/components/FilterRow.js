@@ -47,9 +47,9 @@ export default class FilterRow  extends React.Component{
                 {this.state.filterNames.map((el, index) => {
                     return(
                       <>
-                          <button className="filters" data-autotest-id="dpop" onClick={() => {this.handleClick(index)}} data-tid="826e0c9f">{el.name}</button>
-                          {el.active && el.ascending === "top" && <SortIcon/>}
-                          {el.active && el.ascending === "bottom" && <SortIcon style={{transform: "scale(1, -1)"}}/>}
+                          <button className={`filters mr-2 ${el.active && "activeFilters"}`} data-autotest-id="dpop" onClick={() => {this.handleClick(index)}} data-tid="826e0c9f">{el.name}</button>
+                          {el.active && el.ascending === "top" && <SortIcon fontSize={"small"}/>}
+                          {el.active && el.ascending === "bottom" && <SortIcon fontSize={"small"} style={{transform: "scale(1, -1)"}}/>}
                       </>
                     )
                 })}

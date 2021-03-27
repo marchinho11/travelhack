@@ -2,17 +2,18 @@ import {
     action, makeObservable, observable, toJS
 } from 'mobx';
 import config from "./config";
+import UserModel from "../model/UserModel";
 
 export default class FilterStore {
-    foodType = [];
-
     countries=[];
+    users = [];
 
     constructor() {
         makeObservable(this, {
-            foodType: observable,
+            users: observable,
             countries: observable,
             setCountries: action,
+            setUsers: action,
         });
     }
     
@@ -22,5 +23,9 @@ export default class FilterStore {
             if (element) return element
             return {value: el};
         })
+    }
+    
+    setUsers(list){
+        this.users =  list.map(el => new UserModel(el));
     }
 }
