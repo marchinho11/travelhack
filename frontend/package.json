@@ -7,7 +7,7 @@
   "license": "ISC",
   "private": true,
   "scripts": {
-    "start": "cross-env NODE_ENV=development webpack-dev-server --host 0.0.0.0 --inline --content-base .",
+    "start": "webpack-dev-server --host 0.0.0.0 --inline --content-base .",
     "build": "cross-env NODE_ENV=production npx webpack --mode production",
     "lint": "eslint \"src/**/*.js\""
   },

@@ -24,8 +24,6 @@ const styles = (theme) => ({
   },
 });
 
-
-// From https://bitbucket.org/atlassian/atlaskit-mk-2/raw/4ad0e56649c3e6c973e226b7efaeb28cb240ccb0/packages/core/select/src/data/countries.js
 const countries = [
   { code: 'AD', label: 'Andorra', phone: '376' },
   { code: 'AE', label: 'United Arab Emirates', phone: '971' },
@@ -283,6 +281,7 @@ class FilterPanel extends React.Component {
     this.store = this.props[StoresNames.RecommendationStore];
     this.state = {
       current: null,
+      openCountries: false,
     };
   }
 
@@ -303,28 +302,39 @@ class FilterPanel extends React.Component {
           <Card.Body className="filtersPanel">
             <h4>By category:</h4>
             <Autocomplete
-                id="country-select-demo"
-                className={classes.formControl}
-                options={countries}
-                autoHighlight
-                getOptionLabel={(option) => option.label}
-                renderOption={(option) => (
-                    <React.Fragment>
-                      <span>{countryToFlag(option.code)}</span>
-                      {option.label}
-                    </React.Fragment>
-                )}
-                renderInput={(params) => (
-                    <TextField
-                        {...params}
-                        label="Choose a country"
-                        variant="outlined"
-                        inputProps={{
-                          ...params.inputProps,
-                          autoComplete: 'new-password', // disable autocomplete and autofill
-                        }}
-                    />
-                )}
+              open={this.state.openCountries}
+              onOpen={() => {
+                this.props.services.requestService.getCountries().then(() => {
+                  this.setState({openCountries: true})
+                })
+              }}
+              onClose={() => {
+                this.setState({openCountries: false})
+              }}
+              getOptionSelected={(option, value) => option.label === value.label}
+              getOptionLabel={(option) => option.label}
+              options={countries}
+              renderOption={(option) => (
+                <React.Fragment>
+                  <span>{countryToFlag(option.code)}</span>
+                  {option.label}
+                </React.Fragment>
+              )}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label="Asynchronous"
+                  variant="outlined"
+                  InputProps={{
+                    ...params.InputProps,
+                    endAdornment: (
+                      <React.Fragment>
+                        {params.InputProps.endAdornment}
+                      </React.Fragment>
+                    ),
+                  }}
+                />
+              )}
             />
             <DateRangePicker
                 startDate={this.state.startDate || null} // momentPropTypes.momentObj or null,
@@ -343,4 +353,4 @@ class FilterPanel extends React.Component {
   }
 }
 
-export default inject(StoresNames.RecommendationStore)(withStyles(styles)((observer(FilterPanel))));
+export default inject("services", StoresNames.RecommendationStore)(withStyles(styles)((observer(FilterPanel))));
