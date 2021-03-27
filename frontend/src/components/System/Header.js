@@ -9,6 +9,9 @@ import MenuIcon from '@material-ui/icons/Menu';
 import {IconButton, MuiThemeProvider} from "@material-ui/core";
 import {Autocomplete} from "@material-ui/lab";
 import TextField from "@material-ui/core/TextField";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import {AccountCircle} from "@material-ui/icons";
+import SlideMenu from "../SlideMenu";
 
 class Header extends React.Component {
   constructor(props) {
@@ -47,48 +50,7 @@ class Header extends React.Component {
           <IconButton className={"ml-auto mr-4"} style={{transform: "translate(0, 8px)"}} disableRipple={true} disableFocusRipple={true} onClick={() => {this.handleDrawerClick()}}>
             <MenuIcon/>
           </IconButton>
-          <Drawer anchor={"right"} open={this.state.open} onClose={() => this.handleDrawerClick()}>
-            <MenuItem>
-              <Autocomplete
-                style={{width : "300px"}}
-                open={this.state.openCountries}
-                onOpen={() => {
-                  this.props.services.requestService.getCountries().then(() => {
-                    this.setState({openCountries: true})
-                  })
-                }}
-                onClose={() => {
-                  this.setState({openCountries: false})
-                }}
-                value={this.store.countries.find(el => el.value ===this.state.country) || null}
-                getOptionSelected={(option, value) => option.value === value.value}
-                getOptionLabel={(option) => option.value}
-                options={this.store.countries}
-                renderOption={(option) => (
-                  <React.Fragment>
-                    {option.value}
-                  </React.Fragment>
-                )}
-                // onChange={(e, element) => {this.update("country", element.value)}}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    label={"Выберите пользователя"}
-                    key="Asynchronous"
-                    variant="outlined"
-                    InputProps={{
-                      ...params.InputProps,
-                      endAdornment: (
-                        <React.Fragment>
-                          {params.InputProps.endAdornment}
-                        </React.Fragment>
-                      ),
-                    }}
-                  />
-                )}
-              />
-            </MenuItem>
-          </Drawer>
+          <SlideMenu open={this.state.open} handleDrawerClick={() => this.handleDrawerClick()}/>
         </div>
         <hr/>
       </>

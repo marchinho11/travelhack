@@ -8,6 +8,8 @@ import 'react-dates/initialize';
 import { DateRangePicker, SingleDatePicker, DayPickerRangeController } from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
 import {Button, ButtonGroup, Card} from "react-bootstrap";
+import LanguageIcon from '@material-ui/icons/Language';
+import InputAdornment from "@material-ui/core/InputAdornment";
 
 // ISO 3166-1 alpha-2
 // ⚠️ No support for IE 11
@@ -76,7 +78,7 @@ class FilterPanel extends React.Component {
               options={this.store.countries}
               renderOption={(option) => (
                 <React.Fragment>
-                  <span>{option.code && countryToFlag(option.code)}</span>
+                  <span className={"mr-2"}>{option.code && countryToFlag(option.code)}</span>
                   {option.value}
                 </React.Fragment>
               )}
@@ -89,6 +91,11 @@ class FilterPanel extends React.Component {
                   variant="outlined"
                   InputProps={{
                     ...params.InputProps,
+                    startAdornment:(
+                      <InputAdornment position="start">
+                        <LanguageIcon />
+                      </InputAdornment>
+                    ),
                     endAdornment: (
                       <React.Fragment>
                         {params.InputProps.endAdornment}
@@ -108,7 +115,7 @@ class FilterPanel extends React.Component {
                 onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
             />
   
-            <div className={"d-flex flex-row justify-content-between"}>
+            <div className={"d-flex flex-row justify-content-between flex-wrap"}>
               <Button variant={"link"} style={{padding: "0px"}} onClick={() => {
                 this.setState(this.getDefaultState());
               }}>Очистить</Button>

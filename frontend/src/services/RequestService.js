@@ -26,5 +26,14 @@ export default class RequestService {
       throw res;
     }
   }
+  
+  async getUsers(){
+    const res = await this.networkService.fetch('users',null, "GET");
+    if (this.checkResponse(res)) {
+      this.filterStore.setUsers(res);
+    } else {
+      throw res;
+    }
+  }
   // TODO куча запросов
 }

@@ -198,12 +198,14 @@ html,body, #root{
     color: #04b;
     cursor: pointer;
     outline: none;
-    font-family: YS Text,sans-serif;
-    font-size: 12.8px;
+    font-size: 14px;
     -webkit-transition: color .25s;
     -o-transition: color .25s;
     -moz-transition: color .25s;
     transition: color .25s;
+  }
+  .activeFilters{
+    color: #222;
   }
 }
 
@@ -219,5 +221,14 @@ html,body, #root{
   *{
     z-index: 10000;
   }
+}
+
+.MenuSliderList{
+  padding: 16px;
+  height: 100%;
+  >*{
+    margin-bottom: 8px;
+  }
+
 }
 
