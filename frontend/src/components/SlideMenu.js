@@ -38,7 +38,10 @@ class SlideMenu  extends  React.Component{
     
     
     return(
-      <Drawer anchor={"right"} open={this.props.open} onClose={() => this.props.handleDrawerClick()}>
+      <Drawer anchor={"right"} open={this.props.open} onClose={() => {
+        this.store.setCurrentUser({...this.state});
+        this.props.handleDrawerClick()
+      }}>
         <div className={"MenuSliderList"}>
           <Autocomplete
             style={{width : "300px"}}

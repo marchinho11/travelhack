@@ -4,8 +4,8 @@ export default class UserModel {
   gender;
   
   constructor(obj) {
-    this.user_id = obj.user_id;
-    this.age = obj.age;
-    this.gender = obj.gender;
+    this.user_id = obj?.user_id || null;
+    this.age = obj?.age || null;
+    this.gender = obj?.gender || null;
   }
 }

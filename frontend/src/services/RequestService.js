@@ -9,8 +9,8 @@ export default class RequestService {
 
   checkResponse = res => !(res instanceof MyError);
 
-  async getTourList(filters) {
-    const res = await this.networkService.fetch('tours', filters);
+  async getTourList() {
+    const res = await this.networkService.fetch('tours', this.filterStore.filterPanel);
     if (this.checkResponse(res)) {
       this.recommendationStore.setList(res);
     } else {
