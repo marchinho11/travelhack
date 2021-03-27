@@ -1,3 +1,4 @@
+import json
 import pickle
 
 import numpy as np
@@ -110,6 +111,7 @@ def tour_features(df_):
             "days": ["mean", "max", "min", "median"],
             "season": ["mean", "max", "min", "median"],
             "Звездность": ["mean", "max", "min", "median"],
+            "Сумма в $": ["mean", "max", "min", "median"],
         }
     )
     agg.columns = ["_".join(col) for col in agg.columns]
@@ -120,10 +122,34 @@ def tour_features(df_):
     res = pd.merge(
         res, big_mac_index, left_on="Страна тура", right_on="Страна", how="left"
     )
-    return res
+
+    tour_info_ = df_[["Наименование тура", "Страна тура"]].drop_duplicates().dropna()
+    tour_info_ = pd.merge(tour_info_, agg, on="Наименование тура", how="left")
+    tour_info_["Страна тура"] = features_categorical_mappers[
+        "Страна тура"
+    ].inverse_transform(tour_info_["Страна тура"])
+    tour_info_ = tour_info_[
+        [
+            "Наименование тура",
+            "Страна тура",
+            "Звездность_mean",
+            "Сумма в $_mean",
+        ]
+    ].fillna("")
+    tour_info_.columns = ["name", "country", "stars", "price"]
+    tour_info_ = tour_info_.to_json(force_ascii=False, orient="records")
+    res.fillna(res.mean(), inplace=True)
+    cat_features = [
+        "Страна",
+        "Страна тура",
+    ]
+    res[cat_features] = res[cat_features].astype("int")
+    return res, tour_info_
 
 
-df_tour = tour_features(df)
+df_tour, tour_info = tour_features(df)
+with open("backend/data/tours_info.json", "w") as f_out:
+    f_out.write(tour_info)
 
 logger.debug("Фичи для юзеров")
 
@@ -149,10 +175,30 @@ def user_features(df_):
     agg.columns = ["_".join(col) for col in agg.columns]
     agg = agg.reset_index()
 
-    return agg
+    users_info_ = (
+        df[["ИД клиента", "Пол", "Возраст клиента"]].drop_duplicates().dropna()
+    )
+    users_info_["Пол"] = features_categorical_mappers["Пол"].inverse_transform(
+        users_info_["Пол"]
+    )
+    users_info_.columns = ["user_id", "gender", "age"]
+    users_info_ = users_info_.to_json(force_ascii=False, orient="records")
+
+    agg.fillna(agg.mean(), inplace=True)
+
+    cat_features = [
+        "Вид тура_last",
+        "Звездность_last",
+        "Тип заявки_last",
+    ]
+    agg[cat_features] = agg[cat_features].astype("int")
+
+    return agg, users_info_
 
 
-df_user = user_features(df)
+df_user, users_info_ = user_features(df)
+with open("backend/data/users_info.json", "w") as f_out:
+    f_out.write(users_info_)
 
 logger.debug("Данные бля обучения ранжированию")
 
@@ -189,20 +235,12 @@ X = df_ranking[
         ]
     )
 ]
-X = X.fillna(X.mean())
 y = df_ranking["target"].values
-cat_features = [
-    "Вид тура_last",
-    "Звездность_last",
-    "Страна",
-    "Страна тура",
-    "Тип заявки_last",
-]
-cat_features_indexes = [list(X.columns).index(col) for col in cat_features]
-X[cat_features] = X[cat_features].astype("int")
-
-
 logger.debug("Сохранение данных")
 X.to_csv("backend/data/ranking_x.csv")
 with open("backend/data/ranking_y.pkl", "wb") as f_out:
     pickle.dump(y, f_out)
+
+
+with open("backend/data/tours_info.json", "w") as f_out:
+    json.dump(tour_info, f_out)
