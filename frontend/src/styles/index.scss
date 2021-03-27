@@ -199,11 +199,6 @@ html,body, #root{
   }
 }
 
-.sticky{
-  position: sticky;
-  top: 0px;
-}
-
 .filterRow{
   padding: 0px 15px;
   .filters{
@@ -221,6 +216,13 @@ html,body, #root{
     -moz-transition: color .25s;
     transition: color .25s;
   }
+}
 
+.DateRangePicker_picker{
+  z-index: 10000;
+
+  *{
+    z-index: 10000;
+  }
 }
 

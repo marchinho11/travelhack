@@ -4,6 +4,10 @@ import { StoresNames } from '@/services/common/constDictionary';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { withStyles } from '@material-ui/core/styles';
+import 'react-dates/initialize';
+import { DateRangePicker, SingleDatePicker, DayPickerRangeController } from 'react-dates';
+import 'react-dates/lib/css/_datepicker.css';
+import {Card} from "react-bootstrap";
 
 // ISO 3166-1 alpha-2
 // ⚠️ No support for IE 11
@@ -296,9 +300,9 @@ class FilterPanel extends React.Component {
         </h2>
         <hr />
         {/* BEGIN FILTER BY CATEGORY */}
-        <div className="sticky">
-          <h4>By category:</h4>
-          <div className="checkbox">
+        <Card className="sticky">
+          <Card.Body>
+            <h4>By category:</h4>
             <Autocomplete
                 id="country-select-demo"
                 style={{ width: 300 }}
@@ -324,66 +328,68 @@ class FilterPanel extends React.Component {
                     />
                 )}
             />
-          </div>
-          <div className="checkbox">
-            <label>
-              <input type="checkbox" className="icheck" />
-              {' '}
-              Design
-            </label>
-          </div>
-          <div className="checkbox">
-            <label>
-              <input type="checkbox" className="icheck" />
-              {' '}
-              Desktop
-            </label>
-          </div>
-          <div className="checkbox">
-            <label>
-              <input type="checkbox" className="icheck" />
-              {' '}
-              Management
-            </label>
-          </div>
-          <div className="checkbox">
-            <label>
-              <input type="checkbox" className="icheck" />
-              {' '}
-              Mobile
-            </label>
-          </div>
-          {/* END FILTER BY CATEGORY */}
-          <div className="padding" />
-          {/* BEGIN FILTER BY DATE */}
-          <h4>By date:</h4>
-
-          {/* END FILTER BY DATE */}
-          <div className="padding" />
-          {/* BEGIN FILTER BY PRICE */}
-          <h4>By price:</h4>
-          Between
-          {' '}
-          <div id="price1">$300</div>
-          {' '}
-          to
-          {' '}
-          <div id="price2">$800</div>
-          <div className="slider-primary">
-            <div className="slider slider-horizontal" style={{ width: 152 }}>
-              <div className="slider-track">
-                <div className="slider-selection" style={{ left: '30%', width: '50%' }} />
-                <div className="slider-handle round" style={{ left: '30%' }} />
-                <div className="slider-handle round" style={{ left: '80%' }} />
-              </div>
-              <div className="tooltip top hide" style={{ top: '-30px', left: '50.1px' }}>
-                <div className="tooltip-arrow" />
-                <div className="tooltip-inner">300 : 800</div>
-              </div>
-              <input type="text" className="slider" defaultValue data-slider-min={0} data-slider-max={1000} data-slider-step={1} data-slider-value="[300,800]" data-slider-tooltip="hide" />
+            <DateRangePicker
+                startDate={this.state.startDate || null} // momentPropTypes.momentObj or null,
+                startDateId="your_unique_start_date_id" // PropTypes.string.isRequired,
+                endDate={this.state.endDate || null} // momentPropTypes.momentObj or null,
+                endDateId="your_unique_end_date_id" // PropTypes.string.isRequired,
+                onDatesChange={({ startDate, endDate }) => this.setState({ startDate, endDate })} // PropTypes.func.isRequired,
+                focusedInput={this.state.focusedInput || null} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
+                onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
+            />
+            <div className="checkbox">
+              <label>
+                <input type="checkbox" className="icheck" />
+                {' '}
+                Desktop
+              </label>
             </div>
-          </div>
-        </div>
+            <div className="checkbox">
+              <label>
+                <input type="checkbox" className="icheck" />
+                {' '}
+                Management
+              </label>
+            </div>
+            <div className="checkbox">
+              <label>
+                <input type="checkbox" className="icheck" />
+                {' '}
+                Mobile
+              </label>
+            </div>
+            {/* END FILTER BY CATEGORY */}
+            <div className="padding" />
+            {/* BEGIN FILTER BY DATE */}
+            <h4>By date:</h4>
+
+            {/* END FILTER BY DATE */}
+            <div className="padding" />
+            {/* BEGIN FILTER BY PRICE */}
+            <h4>By price:</h4>
+            Between
+            {' '}
+            <div id="price1">$300</div>
+            {' '}
+            to
+            {' '}
+            <div id="price2">$800</div>
+            <div className="slider-primary">
+              <div className="slider slider-horizontal" style={{ width: 152 }}>
+                <div className="slider-track">
+                  <div className="slider-selection" style={{ left: '30%', width: '50%' }} />
+                  <div className="slider-handle round" style={{ left: '30%' }} />
+                  <div className="slider-handle round" style={{ left: '80%' }} />
+                </div>
+                <div className="tooltip top hide" style={{ top: '-30px', left: '50.1px' }}>
+                  <div className="tooltip-arrow" />
+                  <div className="tooltip-inner">300 : 800</div>
+                </div>
+                <input type="text" className="slider" defaultValue data-slider-min={0} data-slider-max={1000} data-slider-step={1} data-slider-value="[300,800]" data-slider-tooltip="hide" />
+              </div>
+            </div>
+          </Card.Body>
+        </Card>
       </div>
 
     );
