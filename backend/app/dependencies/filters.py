@@ -14,6 +14,7 @@ def get_df():
 def tours_info():
     with open("data/tours_info.json") as f_in:
         tours_info_ = json.load(f_in)
+        tours_info_ = json.loads(tours_info_)
     return tours_info_
 
 
