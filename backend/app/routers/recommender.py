@@ -17,7 +17,7 @@ from app.dependencies import (
 random.seed(42)
 router = APIRouter(prefix="/api")
 
-
+from loguru import logger
 @router.post("/tours")
 async def tours(
     filters: Filters,
@@ -29,6 +29,7 @@ async def tours(
     visited_dict_=Depends(visited_dict),
     features_categorical_mappers_=Depends(features_categorical_mappers),
 ):
+    logger.debug(filters)
     country, user_id = filters.country, filters.user_id
 
     result = []

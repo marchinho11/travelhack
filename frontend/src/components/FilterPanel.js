@@ -38,7 +38,7 @@ class FilterPanel extends React.Component {
   getDefaultState(){
     return {
       openCountries: false,
-      country: ""
+      country: null,
     }
   }
   
