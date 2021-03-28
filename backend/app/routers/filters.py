@@ -17,5 +17,3 @@ async def countries(tours_info_=Depends(tours_info)):
 async def users(users_info_=Depends(users_info)):
     users_info__ = random.sample(users_info_, 10)
     return users_info__
-
-

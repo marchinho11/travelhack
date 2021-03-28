@@ -4,6 +4,7 @@ import pandas as pd
 from fastapi import Depends, APIRouter
 
 from app.schemas import Filters
+from app.deepfm import DeepFMHelper
 from app.dependencies import (
     tour_data,
     user_data,
@@ -16,6 +17,9 @@ from app.dependencies import (
 
 random.seed(42)
 router = APIRouter(prefix="/api")
+deep_fm = DeepFMHelper()
+deep_fm.load_model()
+
 
 @router.post("/tours")
 async def tours(
@@ -51,6 +55,7 @@ async def tours(
                 filter(lambda x: x["country"] == country, tours_info_)
             )
             tours_to_select = list(map(lambda x: x["name"], tours_to_select))
+            annotations = ["Кандидаты отобраны по country"]
         else:
             user_visited = visited_dict_.get(user_id, [])
             candidates_model, candidates_features__ = candidates_features_
@@ -71,29 +76,53 @@ async def tours(
                 lambda x: x["country"] in top_countries, tours_info_
             )
             tours_to_select = [tour["name"] for tour in tours_to_select]
+            annotations = ["Кандидаты отобраны на Decision Tree"]
 
         df_ = pd.DataFrame(
             [(user_id, tour) for tour in tours_to_select],
             columns=["ИД клиента", "Наименование тура"],
         )
         df_ = pd.merge(df_, user_data_, on="ИД клиента")
-
         df_ = pd.merge(df_, tour_data_, on="Наименование тура")
 
         ranker, features = ranker_features_
 
         X = df_[features]
-        scores = ranker.predict_proba(X)[:, 1]
-        df_["score"] = scores
-        df_ = df_.sort_values("score", ascending=False)
-        tours_scores = df_[["Наименование тура", "score"]].values[:100].tolist()
-        tours_scores = random.sample(tours_scores, 15)
-        tours_scores = sorted(tours_scores, key=lambda x: x[1], reverse=True)
+        catboost_scores = ranker.predict_proba(X)[:, 1]
+        deep_fm_scores = deep_fm.predict_proba(X)
 
-        for tour, score in tours_scores:
+        df_["catboost_score"] = catboost_scores
+        df_["deep_fm_score"] = deep_fm_scores
+        df_ = df_.sort_values(["catboost_score", "deep_fm_score"], ascending=False)
+        tours_scores = (
+            df_[["Наименование тура", "catboost_score", "deep_fm_score"]]
+            .values[:200]
+            .tolist()
+        )
+        if len(tours_scores) < 50:
+            tours_scores = tours_scores
+        else:
+            tours_scores = random.sample(tours_scores, 50)
+
+        counter = 0
+        for tour, catboost_score, deep_fm_score in tours_scores:
             tour_info__ = list(filter(lambda x: x["name"] == tour, tours_info_))[0]
-            tour_info__["annotations"] = [f"CatBoost ranker score: {score}"]
-            tour_info__["score"] = score
+            if counter % 2 == 0:
+                tour_info__["annotations"] = annotations + [
+                    f"CatBoost ranker score: {catboost_score}"
+                ]
+                tour_info__["score"] = catboost_score
+            else:
+                tour_info__["annotations"] = annotations + [
+                    f"DeepFM ranker score: {deep_fm_score}"
+                ]
+                tour_info__["score"] = deep_fm_score
+            tour_info__["score"] = round(tour_info__["score"], 2)
             result.append(tour_info__)
 
+            if counter > 18:
+                break
+
+            counter += 1
+    result = sorted(result, key=lambda x: x["score"], reverse=True)
     return result

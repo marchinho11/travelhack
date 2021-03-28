@@ -13,9 +13,8 @@ def roundup(x):
     return int(math.ceil(x / 100.0)) * 100
 
 
-# TODO: excel
 logger.debug("Чтение датафрейма")
-df = pd.read_csv("backend/data/data-full.csv", index_col=0)
+df = pd.read_excel("backend/data/dataset.xlsx", index_col=0)
 
 logger.debug("Базовая предобработка")
 stars_mapping = {
