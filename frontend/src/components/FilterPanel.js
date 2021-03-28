@@ -71,7 +71,7 @@ class FilterPanel extends React.Component {
         </h2>
         <hr />
         {/* BEGIN FILTER BY CATEGORY */}
-        <Card className={"mb-4 mt-4"}>
+        <Card className={"mb-4 mt-3"}>
           <Card.Body className="filtersPanel">
             <h4>Авторизация:</h4>
             <Autocomplete

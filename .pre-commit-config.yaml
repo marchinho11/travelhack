@@ -7,7 +7,7 @@ repos:
         language: system
         types: [ python ]
         require_serial: true
-        args: [--in-place, --remove-all-unused-imports, --ignore-init-module-imports, -r, .]
+        args: [--in-place, --remove-all-unused-imports, --ignore-init-module-imports, -r, backend]
 
   - repo: https://github.com/psf/black
     rev: '20.8b1'

@@ -1,38 +1,34 @@
+import { YMaps, Map, Placemark } from "react-yandex-maps";
 import React from 'react';
-import { YMaps, Map, GeoObject, Placemark } from 'react-yandex-maps';
+import {StoresNames} from "../services/common/constDictionary";
+import { inject, observer } from 'mobx-react';
+
+const mapData = {
+  center: [55.751574, 37.573856],
+  zoom: 5,
+};
 
 
-const mapState = { center: [55.76, 37.64], zoom: 10 };
+class Maps extends React.Component{
+  constructor(props) {
+    super(props);
+    this.store = this.props[StoresNames.RecommendationStore];
+  }
+  render(){
+    return(
+      <YMaps>
+        <Map style={{height:"640px"}} defaultState={{zoom:5, center: this.store.list.length && [this.store.list[0].lat, this.store.list[0].long]}}>
+          {this.store.list.map(tour => {
+            return(
+              <Placemark click={(e) => {
+                console.log(e);}} geometry={[tour.lat, tour.long]} />
+            )
+          })}
+        </Map>
+      </YMaps>
+    )
+  }
+}
 
-const PlacemarkDemo = () =>
-  <YMaps>
-    <Map state={mapState}>
-      {/* Creating a geo object with the "Point" geometry type. */}
-      <GeoObject
-        // The geometry description.
-        geometry={{
-          type: 'Point',
-          coordinates: [55.8, 37.8],
-        }}
-        // Properties.
-        properties={{
-          // The placemark content.
-          iconContent: 'Я тащусь',
-          hintContent: 'Ну давай уже тащи',
-        }}
-        // Options.
-        options={{
-          // The placemark's icon will stretch to fit its contents.
-          preset: 'islands#blackStretchyIcon',
-          // The placemark can be moved.
-          draggable: true,
-        }}
-      />
-      
-      {/*{placemarks.map((placemarkParams, i) =>*/}
-      {/*  <Placemark key={i} {...placemarkParams} />*/}
-      {/*)}*/}
-    </Map>
-  </YMaps>;
 
-export default PlacemarkDemo;
+export default inject(StoresNames.RecommendationStore)(Maps);

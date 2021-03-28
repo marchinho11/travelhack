@@ -32,3 +32,10 @@ def features_categorical_mappers():
     classes_ = features_categorical_mappers_["Страна тура"].classes_
     features_categorical_mappers_ = dict(zip(range(len(classes_)), classes_))
     return features_categorical_mappers_
+
+
+@lru_cache()
+def tour_descriptions():
+    with open("data/descriptions_mapping.pkl", "rb") as f_in:
+        descriptions_mapping = pickle.load(f_in)
+    return descriptions_mapping

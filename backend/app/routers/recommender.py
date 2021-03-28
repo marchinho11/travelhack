@@ -11,6 +11,7 @@ from app.dependencies import (
     tours_info,
     visited_dict,
     ranker_features,
+    tour_descriptions,
     candidates_features,
     features_categorical_mappers,
 )
@@ -31,6 +32,7 @@ async def tours(
     candidates_features_=Depends(candidates_features),
     visited_dict_=Depends(visited_dict),
     features_categorical_mappers_=Depends(features_categorical_mappers),
+    tour_descriptions_=Depends(tour_descriptions),
 ):
     country, user_id = filters.country, filters.user_id
 
@@ -39,14 +41,14 @@ async def tours(
         tours_to_select = (
             list(filter(lambda x: x["country"] == country, tours_info_))
             if country
-            else random.sample(tours_info_, 15)
+            else random.sample(tours_info_, 18)
         )
         annotations = (
             [f"Авторизуйтесь, чтобы увидеть рекомендации"]
             if country
             else [f"Авторизуйтесь, чтобы увидеть рекомендации или укажите страну"]
         )
-        for tour in tours_to_select:
+        for tour in tours_to_select[:18]:
             tour.update({"annotations": annotations, "score": 0, "ranker_type": None})
             result.append(tour)
     else:
@@ -108,15 +110,11 @@ async def tours(
         for tour, catboost_score, deep_fm_score in tours_scores:
             tour_info__ = list(filter(lambda x: x["name"] == tour, tours_info_))[0]
             if counter % 2 == 0:
-                tour_info__["annotations"] = annotations + [
-                    f"CatBoost ranker score: {catboost_score}"
-                ]
+                tour_info__["annotations"] = annotations + ["CatBoost ranker score: "]
                 tour_info__["score"] = catboost_score
                 tour_info__["ranker_type"] = "catboost"
             else:
-                tour_info__["annotations"] = annotations + [
-                    f"DeepFM ranker score: {deep_fm_score}"
-                ]
+                tour_info__["annotations"] = annotations + ["DeepFM ranker score: "]
                 tour_info__["score"] = deep_fm_score
                 tour_info__["ranker_type"] = "deepfm"
 
@@ -127,4 +125,7 @@ async def tours(
 
             counter += 1
     result = sorted(result, key=lambda x: x["score"], reverse=True)
+    for tour in result:
+        tour["description"] = tour_descriptions_.get(tour["name"], None)
+
     return result
