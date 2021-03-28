@@ -11,6 +11,7 @@ from app.dependencies import (
     tours_info,
     visited_dict,
     ranker_features,
+    tour_descriptions,
     candidates_features,
     features_categorical_mappers,
 )
@@ -31,6 +32,7 @@ async def tours(
     candidates_features_=Depends(candidates_features),
     visited_dict_=Depends(visited_dict),
     features_categorical_mappers_=Depends(features_categorical_mappers),
+    tour_descriptions_=Depends(tour_descriptions),
 ):
     country, user_id = filters.country, filters.user_id
 
@@ -123,4 +125,7 @@ async def tours(
 
             counter += 1
     result = sorted(result, key=lambda x: x["score"], reverse=True)
+    for tour in result:
+        tour["description"] = tour_descriptions_.get(tour["name"], None)
+
     return result
