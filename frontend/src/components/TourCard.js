@@ -8,6 +8,7 @@ import {countryToFlag} from "./FilterPanel";
 import config from "../stores/config";
 import Emoji from "a11y-react-emoji";
 import { withStyles } from '@material-ui/core/styles';
+import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 
 const styles = (theme) => ({
     root: {
@@ -44,17 +45,21 @@ class TourCard extends React.Component{
 
                         <div className={"d-flex flex-row justify-content-between"}>
                             <div className="descriptionCard d-flex flex-column">
-                                {/*<span>еда: {this.props.food_type}</span>*/}
-                                {/*<span>еда: {this.props.food_type}</span>*/}
-                                {/*<span>еда: {this.props.food_type}</span>*/}
-                                {this.props.annotations.map((el, index) => (
-                                  <span className={"textMuted"}>{(index === 0 )? el : el + " " + Number(this.props.score).toFixed(3)}</span>
-                                ))}
-                                <div className={"d-flex flex-row"}>
-                                    {this.props.ranker_type === "catboost" && <img className={"align-self-start mt-4"} width={"24px"} height={"24px"}
+                                <span>{this.props.description}</span>
+                                <div className={"d-flex flex-row align-content-center mt-4"}>
+                                    {this.props.ranker_type === "catboost" && <img className={"align-self-start mr-2"} style={{ transform: "translate(0, 25%)"}} width={"24px"} height={"24px"}
                                           src={catboost}></img>}
-                                    {this.props.ranker_type === "deepfm" &&<img className={"align-self-start mt-4"} width={"24px"} height={"24px"}
+                                    {this.props.ranker_type === "deepfm" &&<img className={"align-self-start mr-2"} style={{ transform: "translate(0, 25%)"}} width={"24px"} height={"24px"}
                                           src={deepfm}></img>}
+                                    <div className={"d-flex flex-column"}>
+                                        {this.props.annotations.map((el, index) => (
+                                          <span className={"textMuted d-flex flex-row align-items-center"}>
+                                              <div className={"mr-2"} style={{borderRadius:"100%", width: "4px", height: "4px", backgroundColor: "#9ca8b3"}}/>
+                                              {(index === 0 )? el : `${el} ` }  {el.score && <b
+                                              style={{fontWeight: "bold !important"}}>{Number(this.props.score).toFixed(3)}</b>}
+                                          </span>
+                                        ))}
+                                    </div>
                                 </div>
                             </div>
                         </div>

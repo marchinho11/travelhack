@@ -17,8 +17,13 @@ class Maps extends React.Component{
   render(){
     return(
       <YMaps>
-        <Map style={{height:"100%"}} defaultState={mapData}>
-          {this.store.list.map(tour => <Placemark geometry={[tour.lat, tour.long]} />)}
+        <Map style={{height:"640px"}} defaultState={{zoom:5, center: this.store.list.length && [this.store.list[0].lat, this.store.list[0].long]}}>
+          {this.store.list.map(tour => {
+            return(
+              <Placemark click={(e) => {
+                console.log(e);}} geometry={[tour.lat, tour.long]} />
+            )
+          })}
         </Map>
       </YMaps>
     )
