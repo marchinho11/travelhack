@@ -13,9 +13,9 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import {AccountCircle} from "@material-ui/icons";
 import Emoji from "a11y-react-emoji";
 
-// ISO 3166-1 alpha-2
-// ⚠️ No support for IE 11
+
 export function countryToFlag(isoCode) {
+  if (!isoCode)return null;
   return typeof String.fromCodePoint !== 'undefined'
       ? isoCode
           .toUpperCase()
