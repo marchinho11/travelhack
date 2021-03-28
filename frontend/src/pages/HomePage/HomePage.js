@@ -43,7 +43,7 @@ class HomePage extends React.Component {
     list = this.getSortableList(list, criteria, `${criteria?.value}`)
     
     return (
-      <div className="container">
+      <div className={"ml-4"}>
         <div className="row">
           {/* BEGIN SEARCH RESULT */}
           <div className="col-md-12">
@@ -54,7 +54,7 @@ class HomePage extends React.Component {
                   <FilterPanel />
                   {/* END FILTERS */}
                   {/* BEGIN RESULT */}
-                  <div className="col-md-9">
+                  <div className="col-md-6 flex-row">
                     <div className="mt-4 mb-4 row filterRow d-flex justify-content-between">
                       <FilterRow/>
                       <div>
@@ -71,8 +71,10 @@ class HomePage extends React.Component {
                       })}
                     </div>
                   </div>
+                  <div className={"col-md-3 mt-5"}>
+                    {this.state.showMap && <Maps/>}
+                  </div>
                   {/* END RESULT */}
-                  {this.state.showMap && <Maps/>}
                 </div>
               </div>
             </div>
