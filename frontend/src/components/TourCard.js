@@ -51,8 +51,10 @@ class TourCard extends React.Component{
                                   <span className={"textMuted"}>{el}</span>
                                 ))}
                                 <div className={"d-flex flex-row"}>
-                                    <img className={"align-self-start mt-4"} width={"24px"} height={"24px"} src={catboost}></img>
-                                    <img className={"align-self-start mt-4"} width={"24px"} height={"24px"} src={deepfm}></img>
+                                    {this.props.ranker_type === "catboost" && <img className={"align-self-start mt-4"} width={"24px"} height={"24px"}
+                                          src={catboost}></img>}
+                                    {this.props.ranker_type === "deepfm" &&<img className={"align-self-start mt-4"} width={"24px"} height={"24px"}
+                                          src={deepfm}></img>}
                                 </div>
                             </div>
                         </div>

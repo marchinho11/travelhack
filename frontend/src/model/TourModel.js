@@ -7,6 +7,7 @@ export default class TourModel {
     this.country = obj?.country;
     this.score = obj?.score;
     this.image = obj?.image;
+    this.ranker_type = obj?.ranker_type;
     this.annotations = obj?.annotations || [];
   }
 }
