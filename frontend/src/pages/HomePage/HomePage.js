@@ -6,17 +6,22 @@ import FilterPanel from '@/components/FilterPanel';
 import TourCard from "../../components/TourCard";
 import FilterRow from "../../components/FilterRow";
 import {toJS} from "mobx";
+import IconButton from "@material-ui/core/IconButton";
+import RoomIcon from '@material-ui/icons/Room';
+import ListIcon from '@material-ui/icons/List';
+import Maps from "../../components/Maps";
 
 class HomePage extends React.Component {
   constructor(props) {
     super(props);
     this.recomendationStore = this.props[StoresNames.RecommendationStore];
     this.filterStore = this.props[StoresNames.FilterStore];
+    this.state = {
+      showMap: false,
+    }
   }
   
-  componentDidMount() {
-    this.props.services.requestService.getTourList();
-  }
+
   
   getSortableList(list, criteria, key){
     if(criteria?.value === key){
@@ -50,15 +55,11 @@ class HomePage extends React.Component {
                   {/* END FILTERS */}
                   {/* BEGIN RESULT */}
                   <div className="col-md-9">
-                    <div className="row filterRow">
-                      {/* BEGIN ORDER RESULT */}
+                    <div className="mt-4 mb-4 row filterRow d-flex justify-content-between">
                       <FilterRow/>
-                      {/* END ORDER RESULT */}
-                      <div className="col-md-6 text-right">
-                        <div className="btn-group">
-                          <button type="button" className="btn btn-default active"><i className="fa fa-list" /></button>
-                          <button type="button" className="btn btn-default"><i className="fa fa-th" /></button>
-                        </div>
+                      <div>
+                        <IconButton onClick={() => {this.setState({showMap: true})}} className={"mr-2"}><RoomIcon/></IconButton>
+                        <IconButton onClick={() => {this.setState({showMap: false})}}><ListIcon/></IconButton>
                       </div>
                     </div>
                     {/* BEGIN TABLE RESULT */}
@@ -71,6 +72,7 @@ class HomePage extends React.Component {
                     </div>
                   </div>
                   {/* END RESULT */}
+                  {this.state.showMap && <Maps/>}
                 </div>
               </div>
             </div>

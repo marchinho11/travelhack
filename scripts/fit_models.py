@@ -1,3 +1,4 @@
+import sys
 import pickle
 
 import pandas as pd
@@ -6,10 +7,22 @@ from catboost import Pool, CatBoostClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import train_test_split
 
+sys.path.append(".")
+
+from backend.app.deepfm import DeepFMHelper
+
 logger.debug("Чтение данных")
 X = pd.read_csv("backend/data/ranking_x.csv", index_col=0)
 with open("backend/data/ranking_y.pkl", "rb") as f_in:
     y = pickle.load(f_in)
+
+###
+# Обучение DeepFM
+###
+logger.debug("Обучение DeepFM")
+deep_fm_helper = DeepFMHelper()
+deep_fm_helper.fit(X, y)
+deep_fm_helper.save_model()
 
 ###
 # Обучение модели отбора кандидатов

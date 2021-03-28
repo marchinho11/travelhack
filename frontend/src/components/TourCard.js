@@ -2,7 +2,8 @@
 import React from 'react';
 import {Button, Card} from "react-bootstrap";
 import ReactStars from "react-stars/dist/react-stars";
-import Chip from '@material-ui/core/Chip';
+import catboost from "../../public/static/icons/catboost.png"
+import deepfm from "../../public/static/icons/deepfm.png"
 import {countryToFlag} from "./FilterPanel";
 import config from "../stores/config";
 import Emoji from "a11y-react-emoji";
@@ -40,31 +41,30 @@ class TourCard extends React.Component{
                               color2={classes.root.background}
                             />
                         </div>
-                        {this.props.stars > 4.5 ?
-                          <Chip
-                            classes={{
-                                root: classes.root
-                            }}
-                            icon={<Emoji symbol={"👍"}/>}
-                            label={"Рекомендуем"}
-                          />
-                        
-                          : null}
+
                         <div className={"d-flex flex-row justify-content-between"}>
                             <div className="descriptionCard d-flex flex-column">
-                                <span>еда: {this.props.food_type}</span>
-                                <span>еда: {this.props.food_type}</span>
-                                <span>еда: {this.props.food_type}</span>
+                                {/*<span>еда: {this.props.food_type}</span>*/}
+                                {/*<span>еда: {this.props.food_type}</span>*/}
+                                {/*<span>еда: {this.props.food_type}</span>*/}
                                 {this.props.annotations.map(el => (
                                   <span className={"textMuted"}>{el}</span>
                                 ))}
+                                <div className={"d-flex flex-row"}>
+                                    {this.props.ranker_type === "catboost" && <img className={"align-self-start mt-4"} width={"24px"} height={"24px"}
+                                          src={catboost}></img>}
+                                    {this.props.ranker_type === "deepfm" &&<img className={"align-self-start mt-4"} width={"24px"} height={"24px"}
+                                          src={deepfm}></img>}
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div className="activeCard d-flex flex-column">
+                    <div className="activeCard d-flex flex-column justify-content-between">
                         <span className={"tourPrice mb-4 text-center"}>
                             {this.props.price} $
-                            
+                            {this.props.stars > 4.5 ?
+                              <Emoji symbol={"👍"}/>
+                              : null}
                         </span>
                         <Button variant="success">Заказать</Button>
                     </div>

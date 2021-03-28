@@ -89,7 +89,7 @@ module.exports = {
   },
   plugins: [
     new HTMLWebpackPlugin({
-      title: 'БизнесАтом',
+      title: 'TUI - RecSys',
       template: './public/index.html',
       filename: './index.html',
       favicon: './public/static/images/favicon.png',
