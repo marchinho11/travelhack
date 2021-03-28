@@ -21,9 +21,7 @@ class HomePage extends React.Component {
     }
   }
   
-  componentDidMount() {
-    this.props.services.requestService.getTourList();
-  }
+
   
   getSortableList(list, criteria, key){
     if(criteria?.value === key){
