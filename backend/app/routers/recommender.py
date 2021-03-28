@@ -39,14 +39,14 @@ async def tours(
         tours_to_select = (
             list(filter(lambda x: x["country"] == country, tours_info_))
             if country
-            else random.sample(tours_info_, 15)
+            else random.sample(tours_info_, 18)
         )
         annotations = (
             [f"Авторизуйтесь, чтобы увидеть рекомендации"]
             if country
             else [f"Авторизуйтесь, чтобы увидеть рекомендации или укажите страну"]
         )
-        for tour in tours_to_select:
+        for tour in tours_to_select[:18]:
             tour.update({"annotations": annotations, "score": 0, "ranker_type": None})
             result.append(tour)
     else:
