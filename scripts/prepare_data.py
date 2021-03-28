@@ -4,9 +4,9 @@ import pickle
 
 import numpy as np
 import pandas as pd
+from tqdm import tqdm
 from loguru import logger
 from sklearn.preprocessing import LabelEncoder
-from tqdm import tqdm
 
 
 def roundup(x):
@@ -50,6 +50,118 @@ stars_mapping = {
     "4*-5*": 4.5,
     "cat A": 4,
 }
+feed_mapping = {
+    "All Inclusive": "AI",
+    "Ultra All Exclusive": "UAI",
+    "PREMIUM ALA CARTE ALL INCLUSIVE": "AI",
+    "Premium All Inclusive": "AI",
+    "Ultimate All Inclusive": "UAI",
+    "A'LA CARTE ALL INCLUSIVE": "AI",
+    "PALAZZO ALL INCLUSIVE": "AI",
+    "PREMIER ULTRA ALL INCLUSIVE": "UAI",
+    "PREMIUM ULTRA ALL INCLUSIVE": "UAI",
+    "Golden All Inclusive": "UAI",
+    "Bed Only": "RO",
+    "Полный пансион": "FB",
+    "FB + Оздоровит. путевка": "FB",
+    "FB + Лечение": "FB",
+    "Breakfast": "BB",
+    "По программе": "APP",
+    "FB + Антистресс": "FB",
+    "HB (завтрак+ужин)": "HB",
+    "0": None,
+    "FB + Отдых": "FB",
+    "FB+": "FB",
+    "Оздоровительная.": "HB",
+    "HB + Оздоровит. путевка": "HB",
+    "Полный пансион + Лечение": "FB",
+    "Полный Пансион + Смарт путевка": "FB",
+    "BB + Оздоровит. путевка": "BB",
+    "Полупансион (завтрак+ужин)": "HB",
+    "Soft All Inclusive": "AI",
+    "Platinum Plan All inclusive": "AI",
+    "ULTRA ALL INCLUSIVE PLUS": "UAI",
+    "Bed And Breakfast Plus": "BB",
+    "FB AI": "AI",
+    "ALL IN CONCEPT": "AI",
+    "HB+": "HB",
+    "AIS": "AI",
+    "PRIVILEGED LIFE": "UAI",
+    "AI NON ALCOHOL": "AI",
+    "LAI": "AI",
+    "SUPERIOR ALL INCLUSIVE": "AI",
+    "PRE.AI.LIFE STYLE": "FB",
+    "ULTRA ALL INCLUSIVE WITH HIGH LEVEL": "UAI",
+    "Super All Inclusive": "UAI",
+    "As Per Program": "APP",
+    "FB + Gala Dinner": "FB",
+    "Half Board Premium": "HB",
+    "BB+FB": "BB",
+    "All Inclusive Ultra": "UAI",
+    "HB (завтрак+обед)": "HB",
+    "Завтрак": "BB",
+    "All Inclusive Aqua": "AI",
+    "BB Пляжный": "BB",
+    "FB + Общетерапевт.путевка": "FB",
+    "BB+HB": "BB",
+    "RO + Оздоровительная курсовка": "RO",
+    "RO + Оздоровительная путевка": "RO",
+    "По программе +": "APP",
+    "HB + Лечение": "HB",
+    "Al + лечение": "Al",
+    "Все включено ПЛЯЖНЫЙ": "Al",
+    "Полный пансион + Общетерапевтическая без Мацесты": "FB",
+    "Полный пансион + путевка Курортная": "FB",
+    "Полный Пансион + Серебряный возраст": "FB",
+    "Полный Пансион (шведский стол) + Отдых": "FB",
+    "Без питания": "RO",
+    "Half Board Platinum": "HB",
+    "Half Board Dine Around": "HB",
+    "HB Plus": "HB",
+    "All Inclusive Dine Around": "AI",
+    "Basic All Inclusive": "AI",
+    "Diamond AI": "AI",
+    "DAI": "AI",
+    "Emerald All Inclusive": "AI",
+    "Pure Indulgence Dine Around": "UAI",
+    "VARU ALL INCLUSIVE": "AI",
+    "All Inclusive Lite": "AI",
+    "LUXME": "UAI",
+    "FBp - Завтрак, обед, ужин (Premium)": "FB",
+    "All Inclusive Premium": "AI",
+    "Full Board Premium": "FB",
+    "PR - Завтрак, ужин (Premium)": "HB",
+    "All Inc Ultra Luxury": "UAI",
+    "Half board + drinks": "HB",
+    "FB Beverage": "FB",
+    "Full Board + drinks": "FB",
+    "HB Beverage": "HB",
+    "AI Light": "AI",
+    "Only Bed": "RO",
+    "HB AI": "HB",
+    "Half Board Beach": "HB",
+    "Light All Inclusive": "AI",
+    "LAI FB": "FB",
+    "Limited all Inclusive": "AI",
+    "LAI HB": "HB",
+    "Full Board Treatment Relax": "FB",
+    "FBT": "FB",
+    "Half Board Treatment Relax": "HB",
+    "BB Continental": "BB",
+    "Все включено СЕМЕЙНЫЙ": "AI",
+    "Полный Пансион+Отдых бассейн с термотерапией": "FB",
+    "Полный пансион+ Общетерапевтическая Лайт": "FB",
+    "Полный пансион + Общетерапевтическая с Мацестой": "FB",
+    "FB + Оздоровительная": "FB",
+    "FB ресторан «Алтай» + Лечебная путевка": "FB",
+    "Serenity Plan": "FB",
+    "Gold All Inclusive": "UAI",
+    "Crystal Package": "FB",
+    "Island Plan All Inclusive": "AI",
+    "Full Dine Around All Inclusive": "AI",
+    "All inclusive Style": "AI",
+}
+df["Тип питания"] = df["Тип питания"].map(feed_mapping)
 df["Звездность"] = df["Звездность"].map(stars_mapping)
 df["Звездность"] = df["Звездность"].fillna(df["Звездность"].mean())
 
@@ -159,9 +271,9 @@ def tour_features(df_):
     return res, tour_info_
 
 
-df_tour, tour_info = tour_features(df)
+df_tour, tour_info_ = tour_features(df)
 with open("backend/data/tours_info.json", "w") as f_out:
-    f_out.write(tour_info)
+    f_out.write(tour_info_)
 
 logger.debug("Фичи для юзеров")
 
@@ -215,6 +327,19 @@ with open("backend/data/users_info.json", "w") as f_out:
 logger.debug("Данные для обучения ранжированию")
 
 
+def visited(df):
+    df_ = df[["ИД клиента", "Страна тура"]]
+    grouped = df_.groupby("ИД клиента")
+    res = grouped.aggregate(lambda x: list(set(x)))
+    dict_ = res.T.to_dict(orient="records")[0]
+    return dict_
+
+
+visited_countries = visited(df)
+with open("backend/data/visited_countries.json", "w") as f_out:
+    json.dump(visited_countries, f_out)
+
+
 def ranking_data(df_):
     tour_country = set(map(tuple, df_[["Страна тура", "Наименование тура"]].values))
     data = []
@@ -256,6 +381,5 @@ df_tour.to_csv("backend/data/df_tour.csv")
 with open("backend/data/ranking_y.pkl", "wb") as f_out:
     pickle.dump(y, f_out)
 
-
-with open("backend/data/tours_info.json", "w") as f_out:
-    json.dump(tour_info, f_out)
+with open("backend/data/features_categorical_mappers.pkl", "wb") as f_out:
+    pickle.dump(features_categorical_mappers, f_out)
