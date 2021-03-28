@@ -3,7 +3,7 @@ import React from 'react';
 import {Button, Card} from "react-bootstrap";
 import ReactStars from "react-stars/dist/react-stars";
 import catboost from "../../public/static/icons/catboost.png"
-import deepfm from "../../public/static/icons/deepfm.jpg"
+import deepfm from "../../public/static/icons/deepfm.png"
 import {countryToFlag} from "./FilterPanel";
 import config from "../stores/config";
 import Emoji from "a11y-react-emoji";

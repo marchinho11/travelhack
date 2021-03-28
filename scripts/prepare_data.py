@@ -161,6 +161,7 @@ feed_mapping = {
     "Full Dine Around All Inclusive": "AI",
     "All inclusive Style": "AI",
 }
+print(df.head())
 df["Тип питания"] = df["Тип питания"].map(feed_mapping)
 df["Звездность"] = df["Звездность"].map(stars_mapping)
 df["Звездность"] = df["Звездность"].fillna(df["Звездность"].mean())
