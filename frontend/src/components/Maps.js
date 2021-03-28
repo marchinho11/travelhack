@@ -20,8 +20,7 @@ class Maps extends React.Component{
         <Map style={{height:"640px"}} defaultState={{zoom:5, center: this.store.list.length && [this.store.list[0].lat, this.store.list[0].long]}}>
           {this.store.list.map(tour => {
             return(
-              <Placemark click={(e) => {
-                console.log(e);}} geometry={[tour.lat, tour.long]} />
+              <Placemark geometry={[tour.lat, tour.long]} />
             )
           })}
         </Map>
