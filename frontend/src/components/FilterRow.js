@@ -1,33 +1,20 @@
 import React from 'react';
 import SortIcon from '@material-ui/icons/Sort';
+import {inject, observer} from "mobx-react";
+import {withStyles} from "@material-ui/core/styles";
+import {StoresNames} from "../services/common/constDictionary";
 
-export default class FilterRow  extends React.Component{
+class FilterRow  extends React.Component{
     constructor(props) {
         super(props);
-        this.state = {
-            filterNames:[
-                {
-                    ascending: "top",
-                    active: false,
-                    name: "по цене"
-                },
-                {
-                    active: false,
-                    name: "по релевантности"
-                },
-                {
-                    ascending: "top",
-                    active: false,
-                    name: "по времени"
-                },
-                ]
-        }
+        this.store = this.props[StoresNames.FilterStore];
     }
     
     handleClick(index){
-        const filterNames = this.state.filterNames;
+        const filterNames = this.store.filterNames;
         const prop = filterNames[index];
         if(!prop.active){
+            filterNames.forEach(el => el.active = false);
             prop.active = true;
             filterNames[index] = prop;
         } else {
@@ -36,15 +23,13 @@ export default class FilterRow  extends React.Component{
             }
             filterNames[index] = prop;
         }
-        this.setState((state, props) => {
-            return {filterNames};
-        });
+        this.store.setFilterNames(filterNames);
     }
     
     render() {
         return(
             <div className="_3_l6GZZNkG"><span className="n-filter-sorter__label">Сортировать:</span>
-                {this.state.filterNames.map((el, index) => {
+                {this.store.filterNames.map((el, index) => {
                     return(
                       <>
                           <button className={`filters mr-2 ${el.active && "activeFilters"}`} data-autotest-id="dpop" onClick={() => {this.handleClick(index)}} data-tid="826e0c9f">{el.name}</button>
@@ -57,3 +42,5 @@ export default class FilterRow  extends React.Component{
         )
     }
 }
+
+export default inject(StoresNames.FilterStore)((observer(FilterRow)))

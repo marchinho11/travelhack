@@ -1,4 +1,5 @@
 import MyError from '@/services/MyError';
+import config from "../stores/config";
 
 export default class RequestService {
   constructor(networkService, recommendationStore, filterStore) {

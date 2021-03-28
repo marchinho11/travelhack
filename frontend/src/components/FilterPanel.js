@@ -13,7 +13,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 
 // ISO 3166-1 alpha-2
 // ⚠️ No support for IE 11
-function countryToFlag(isoCode) {
+export function countryToFlag(isoCode) {
   return typeof String.fromCodePoint !== 'undefined'
       ? isoCode
           .toUpperCase()
@@ -38,7 +38,7 @@ class FilterPanel extends React.Component {
   getDefaultState(){
     return {
       openCountries: false,
-      country: ""
+      country: null,
     }
   }
   
@@ -82,7 +82,7 @@ class FilterPanel extends React.Component {
                   {option.value}
                 </React.Fragment>
               )}
-              onChange={(e, element) => {this.update("country", element.value)}}
+              onChange={(e, element) => {this.update("country", element?.value)}}
               renderInput={(params) => (
                 <TextField
                   {...params}
