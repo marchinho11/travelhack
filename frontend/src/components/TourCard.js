@@ -40,16 +40,7 @@ class TourCard extends React.Component{
                               color2={classes.root.background}
                             />
                         </div>
-                        {this.props.stars > 4.5 ?
-                          <Chip
-                            classes={{
-                                root: classes.root
-                            }}
-                            icon={<Emoji symbol={"👍"}/>}
-                            label={"Рекомендуем"}
-                          />
-                        
-                          : null}
+
                         <div className={"d-flex flex-row justify-content-between"}>
                             <div className="descriptionCard d-flex flex-column">
                                 <span>еда: {this.props.food_type}</span>
@@ -64,7 +55,9 @@ class TourCard extends React.Component{
                     <div className="activeCard d-flex flex-column">
                         <span className={"tourPrice mb-4 text-center"}>
                             {this.props.price} $
-                            
+                            {this.props.stars > 4.5 ?
+                              <Emoji symbol={"👍"}/>
+                              : null}
                         </span>
                         <Button variant="success">Заказать</Button>
                     </div>
