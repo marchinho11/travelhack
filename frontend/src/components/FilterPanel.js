@@ -82,7 +82,7 @@ class FilterPanel extends React.Component {
                   {option.value}
                 </React.Fragment>
               )}
-              onChange={(e, element) => {this.update("country", element.value)}}
+              onChange={(e, element) => {this.update("country", element?.value)}}
               renderInput={(params) => (
                 <TextField
                   {...params}

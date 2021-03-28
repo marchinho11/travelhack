@@ -30,7 +30,7 @@ class TourCard extends React.Component{
                 <section className={"d-flex flex-row justify-content-between"}>
                     <div className={"d-flex flex-column"}>
                         <div className={"d-flex flex-row flex-wrap align-items-center"}>
-                            <Card.Title className={"cardLabel mb-0 mr-2"}>{countryToFlag(config.countries.find(el => el.value === this.props.country).code)} {this.props.name}</Card.Title>
+                            <Card.Title className={"cardLabel mb-0 mr-2"}>{countryToFlag(config.countries.find(el => el.value === this.props.country)?.code)} {this.props.name}</Card.Title>
                             <ReactStars
                               className={"mr-2"}
                               edit={false}
