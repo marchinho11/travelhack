@@ -8,7 +8,7 @@ import {countryToFlag} from "./FilterPanel";
 import config from "../stores/config";
 import Emoji from "a11y-react-emoji";
 import { withStyles } from '@material-ui/core/styles';
-import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
+import ShowMoreText from 'react-show-more-text';
 
 const styles = (theme) => ({
     root: {
@@ -45,7 +45,17 @@ class TourCard extends React.Component{
 
                         <div className={"d-flex flex-row justify-content-between"}>
                             <div className="descriptionCard d-flex flex-column">
-                                <span>{this.props.description}</span>
+                                <ShowMoreText
+                                  /* Default options */
+                                  lines={3}
+                                  more='Читать далее'
+                                  less='Свернуть'
+                                  className='content-css'
+                                  anchorClass='my-anchor-css-class'
+                                  expanded={false}
+                                >
+                                    {this.props.description}
+                                </ShowMoreText>
                                 <div className={"d-flex flex-row align-content-center mt-4"}>
                                     {this.props.ranker_type === "catboost" && <img className={"align-self-start mr-2"} style={{ transform: "translate(0, 25%)"}} width={"24px"} height={"24px"}
                                           src={catboost}></img>}
