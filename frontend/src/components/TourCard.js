@@ -47,8 +47,8 @@ class TourCard extends React.Component{
                                 {/*<span>еда: {this.props.food_type}</span>*/}
                                 {/*<span>еда: {this.props.food_type}</span>*/}
                                 {/*<span>еда: {this.props.food_type}</span>*/}
-                                {this.props.annotations.map(el => (
-                                  <span className={"textMuted"}>{el}</span>
+                                {this.props.annotations.map((el, index) => (
+                                  <span className={"textMuted"}>{(index === 0 )? el : el + " " + Number(this.props.score).toFixed(3)}</span>
                                 ))}
                                 <div className={"d-flex flex-row"}>
                                     {this.props.ranker_type === "catboost" && <img className={"align-self-start mt-4"} width={"24px"} height={"24px"}

@@ -8,6 +8,8 @@ export default class TourModel {
     this.score = obj?.score;
     this.image = obj?.image;
     this.ranker_type = obj?.ranker_type;
+    this.lat = obj?.lat;
+    this.long = obj?.long;
     this.annotations = obj?.annotations || [];
   }
 }
