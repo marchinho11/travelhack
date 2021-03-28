@@ -10,6 +10,7 @@ import IconButton from "@material-ui/core/IconButton";
 import RoomIcon from '@material-ui/icons/Room';
 import ListIcon from '@material-ui/icons/List';
 import Maps from "../../components/Maps";
+import {Tooltip} from "@material-ui/core";
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -58,8 +59,13 @@ class HomePage extends React.Component {
                     <div className="mt-4 mb-4 row filterRow d-flex justify-content-between">
                       <FilterRow/>
                       <div>
-                        <IconButton onClick={() => {this.setState({showMap: true})}} className={"mr-2"}><RoomIcon/></IconButton>
-                        <IconButton onClick={() => {this.setState({showMap: false})}}><ListIcon/></IconButton>
+                        <Tooltip title={"Показать на карте"}>
+                          <IconButton onClick={() => {this.setState({showMap: true})}} className={"mr-2"}><RoomIcon/></IconButton>
+                        </Tooltip>
+                        <Tooltip title={"Показать списком"}>
+                          <IconButton onClick={() => {this.setState({showMap: false})}}><ListIcon/></IconButton>
+                        </Tooltip>
+
                       </div>
                     </div>
                     {/* BEGIN TABLE RESULT */}
