@@ -13,9 +13,9 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import {AccountCircle} from "@material-ui/icons";
 import Emoji from "a11y-react-emoji";
 
-// ISO 3166-1 alpha-2
-// ⚠️ No support for IE 11
+
 export function countryToFlag(isoCode) {
+  if (!isoCode)return null;
   return typeof String.fromCodePoint !== 'undefined'
       ? isoCode
           .toUpperCase()
@@ -36,10 +36,14 @@ class FilterPanel extends React.Component {
     this.state = this.getDefaultState();
   }
   
+  componentDidMount() {
+    this.props.services.requestService.getTourList({...this.state});
+  }
+  
   
   getDefaultState(){
     return {
-      openCountries: false,
+      openCountries: null,
       country: null,
       user_id: null,
       openUsers: null,
@@ -49,12 +53,14 @@ class FilterPanel extends React.Component {
   }
   
   update(key, value){
-    this.setState({[key]: value})
+    this.setState(state => {
+     return {...state, [key]: value}
+    })
   }
   
   render() {
     const classes = this.props.classes;
-    const user = this.store.users.find(el => el.user_id === this.state.user_id) || this.state;
+    const user = this.store.users.find(el => el.user_id === this.state.user_id) || null;
 
     return (
       <div className="col-md-3">
@@ -78,9 +84,8 @@ class FilterPanel extends React.Component {
     
               onClose={() => {
                 this.setState({openUsers: false})
-                this.getDefaultState();
               }}
-              value={this.store.users.find(el => el.user_id ===this.state.user_id) || null}
+              value={user || null}
               getOptionSelected={(option, value) => option.user_id === value}
               getOptionLabel={(option) => String(option.user_id)}
               options={this.store.users}
@@ -90,8 +95,7 @@ class FilterPanel extends React.Component {
                 </React.Fragment>
               )
               }
-    
-              onChange={(e, obj) => {this.update("user_id", obj?.user_id)}}
+              onChange={(e, obj) => {this.update("user_id", obj?.user_id || null)}}
               renderInput={(params) => (
                 <TextField
                   {...params}
@@ -114,13 +118,13 @@ class FilterPanel extends React.Component {
                 />
               )}
             />
-            {user.gender &&
+            {user?.gender &&
             <div className={"emojiLine d-flex flex-row align-items-center"} style={{alignItems: "flex-start"}}>
               <Emoji symbol={(user.gender === "женский")? "👸": "👲"}/>
               <h5 className={"font-weight-bold"}>{user.gender}</h5>
             </div>
             }
-            {user.age && <h5 className={"font-weight-bold"}>Возраст: {user.age}</h5>}
+            {user?.age && <h5 className={"font-weight-bold"}>Возраст: {user.age}</h5>}
           </Card.Body>
         </Card>
         <Card>
@@ -175,8 +179,7 @@ class FilterPanel extends React.Component {
                 this.setState(this.getDefaultState());
               }}>Очистить</Button>
               <Button variant={"primary"} onClick={() => {
-                this.store.setFilterPanel({...this.state})
-                this.props.services.requestService.getTourList();
+                this.props.services.requestService.getTourList({...this.state});
               }}>Найти</Button>
             </div>
           </Card.Body>
