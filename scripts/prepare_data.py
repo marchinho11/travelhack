@@ -14,7 +14,7 @@ def roundup(x):
 
 
 logger.debug("Чтение датафрейма")
-df = pd.read_excel("backend/data/dataset.xlsx", index_col=0)
+df = pd.read_excel("backend/data/dataset.xlsx")
 
 logger.debug("Базовая предобработка")
 stars_mapping = {
@@ -160,6 +160,7 @@ feed_mapping = {
     "Full Dine Around All Inclusive": "AI",
     "All inclusive Style": "AI",
 }
+print(df.head())
 df["Тип питания"] = df["Тип питания"].map(feed_mapping)
 df["Звездность"] = df["Звездность"].map(stars_mapping)
 df["Звездность"] = df["Звездность"].fillna(df["Звездность"].mean())

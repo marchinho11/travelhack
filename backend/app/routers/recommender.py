@@ -47,7 +47,7 @@ async def tours(
             else [f"Авторизуйтесь, чтобы увидеть рекомендации или укажите страну"]
         )
         for tour in tours_to_select:
-            tour.update({"annotations": annotations, "score": 0})
+            tour.update({"annotations": annotations, "score": 0, "ranker_type": None})
             result.append(tour)
     else:
         if country:
@@ -112,12 +112,14 @@ async def tours(
                     f"CatBoost ranker score: {catboost_score}"
                 ]
                 tour_info__["score"] = catboost_score
+                tour_info__["ranker_type"] = "catboost"
             else:
                 tour_info__["annotations"] = annotations + [
                     f"DeepFM ranker score: {deep_fm_score}"
                 ]
                 tour_info__["score"] = deep_fm_score
-            tour_info__["score"] = round(tour_info__["score"], 2)
+                tour_info__["ranker_type"] = "deepfm"
+
             result.append(tour_info__)
 
             if counter > 18:

@@ -3,7 +3,7 @@ import React from 'react';
 import {Button, Card} from "react-bootstrap";
 import ReactStars from "react-stars/dist/react-stars";
 import catboost from "../../public/static/icons/catboost.png"
-import deepfm from "../../public/static/icons/deepfm.jpg"
+import deepfm from "../../public/static/icons/deepfm.png"
 import {countryToFlag} from "./FilterPanel";
 import config from "../stores/config";
 import Emoji from "a11y-react-emoji";
@@ -51,8 +51,10 @@ class TourCard extends React.Component{
                                   <span className={"textMuted"}>{el}</span>
                                 ))}
                                 <div className={"d-flex flex-row"}>
-                                    <img className={"align-self-start mt-4"} width={"24px"} height={"24px"} src={catboost}></img>
-                                    <img className={"align-self-start mt-4"} width={"24px"} height={"24px"} src={deepfm}></img>
+                                    {this.props.ranker_type === "catboost" && <img className={"align-self-start mt-4"} width={"24px"} height={"24px"}
+                                          src={catboost}></img>}
+                                    {this.props.ranker_type === "deepfm" &&<img className={"align-self-start mt-4"} width={"24px"} height={"24px"}
+                                          src={deepfm}></img>}
                                 </div>
                             </div>
                         </div>
