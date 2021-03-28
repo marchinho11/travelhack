@@ -17,6 +17,7 @@ from app.dependencies import (
 random.seed(42)
 router = APIRouter(prefix="/api")
 
+
 @router.post("/tours")
 async def tours(
     filters: Filters,

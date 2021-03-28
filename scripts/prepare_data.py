@@ -1,6 +1,7 @@
 import json
 import math
 import pickle
+from ast import literal_eval as make_tuple
 
 import numpy as np
 import pandas as pd
@@ -13,9 +14,8 @@ def roundup(x):
     return int(math.ceil(x / 100.0)) * 100
 
 
-# TODO: excel
 logger.debug("Чтение датафрейма")
-df = pd.read_csv("backend/data/data-full.csv", index_col=0)
+df = pd.read_excel("backend/data/dataset.xlsx")
 
 logger.debug("Базовая предобработка")
 stars_mapping = {
@@ -220,6 +220,14 @@ salary_by_city["departure_city"] = features_categorical_mappers[
 
 logger.debug("Фичи для туров")
 
+df_coords = pd.read_csv("backend/data/data_distance_coordinates.csv", index_col=0)
+
+coords_mapping = {}
+
+for name, coords_ in df_coords[["Наименование тура", "hotel_coords"]].values:
+    lat, long = make_tuple(coords_)
+    coords_mapping[name] = {"lat": lat, "long": long}
+
 
 def tour_features(df_):
     agg = df_.groupby("Наименование тура").agg(
@@ -258,7 +266,18 @@ def tour_features(df_):
         lambda x: roundup(x)
     )
     tour_info_.columns = ["name", "country", "stars", "price"]
-    tour_info_ = tour_info_.to_json(force_ascii=False, orient="records")
+    tour_info_ = json.loads(tour_info_.to_json(force_ascii=False, orient="records"))
+
+    for tour in tour_info_:
+        if tour["name"] in coords_mapping:
+            tour["lat"] = coords_mapping[tour["name"]]["lat"]
+            tour["long"] = coords_mapping[tour["name"]]["long"]
+        else:
+            tour["lat"] = None
+            tour["long"] = None
+
+    tour_info_ = json.dumps(tour_info_)
+
     res.fillna(res.mean(), inplace=True)
     cat_features = [
         "Страна",
