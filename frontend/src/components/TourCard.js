@@ -53,11 +53,12 @@ class TourCard extends React.Component{
                                           src={deepfm}></img>}
                                     <div className={"d-flex flex-column"}>
                                         {this.props.annotations.map((el, index) => (
-                                          <span className={"textMuted d-flex flex-row align-items-center"}>
+                                          <div className={"textMuted d-flex flex-row align-items-center"}>
                                               <div className={"mr-2"} style={{borderRadius:"100%", width: "4px", height: "4px", backgroundColor: "#9ca8b3"}}/>
-                                              {(index === 0 )? el : `${el} ` }  {el.score && <b
-                                              style={{fontWeight: "bold !important"}}>{Number(this.props.score).toFixed(3)}</b>}
-                                          </span>
+                                              {(index === 0 )? el : `${el} ` }
+                                              {this.props.score && index === 1
+                                              && <b className={"ml-2"} style={{fontWeight: "bold !important"}}> {Number(this.props.score).toFixed(3)}</b>}
+                                          </div>
                                         ))}
                                     </div>
                                 </div>
