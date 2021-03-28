@@ -21,7 +21,6 @@ deep_fm = DeepFMHelper()
 deep_fm.load_model()
 
 
-
 @router.post("/tours")
 async def tours(
     filters: Filters,
@@ -109,15 +108,11 @@ async def tours(
         for tour, catboost_score, deep_fm_score in tours_scores:
             tour_info__ = list(filter(lambda x: x["name"] == tour, tours_info_))[0]
             if counter % 2 == 0:
-                tour_info__["annotations"] = annotations + [
-                    f"CatBoost ranker score: {catboost_score}"
-                ]
+                tour_info__["annotations"] = annotations + ["CatBoost ranker score: "]
                 tour_info__["score"] = catboost_score
                 tour_info__["ranker_type"] = "catboost"
             else:
-                tour_info__["annotations"] = annotations + [
-                    f"DeepFM ranker score: {deep_fm_score}"
-                ]
+                tour_info__["annotations"] = annotations + ["DeepFM ranker score: "]
                 tour_info__["score"] = deep_fm_score
                 tour_info__["ranker_type"] = "deepfm"
 
