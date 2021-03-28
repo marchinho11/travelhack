@@ -7,6 +7,9 @@
 ![](https://img.shields.io/badge/code_style-isort-black)
 ![](https://img.shields.io/badge/code_style-autoflake-black)
 
+# Демо
+![](pic/demo.gif)
+
 ## Сервис персонализированных предложений для сайта туроператора TUI
 
 https://travelhack.moscow/task/tui/
