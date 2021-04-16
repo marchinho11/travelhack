@@ -4,3 +4,4 @@ frontend/node_modules
 frontend/package-lock.json
 notebooks/data
 backend/data
+poetry.lock
