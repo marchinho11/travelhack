@@ -36,10 +36,6 @@ class App extends React.Component {
     };
   }
 
-  getCheckAppMode(mode) {
-    return process.env.APP_ENDPOINT_REQUEST;
-  }
-
   render() {
     return (
       <Provider {...this.stores} services={this.services}>

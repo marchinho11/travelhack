@@ -16,6 +16,7 @@ x-frontend: &frontend
   image: frontend
   volumes:
     - ./frontend:/frontend
+    - ./frontend/node_modules
 
 
 services:
