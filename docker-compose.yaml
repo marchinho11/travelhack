@@ -31,6 +31,6 @@ services:
 
   frontend:
     <<: *frontend
-    command: npm run start
+    command: sh -c "cd /frontend; npm install --legacy-peer-deps; npm run start"
     ports:
       - 3000:3000
